@@ -1,18 +1,20 @@
 import React, { useContext } from "react";
 import toast from "react-hot-toast";
-import { Link } from "react-router-dom";
+import { FaUserCircle } from "react-icons/fa";
+import { Link, NavLink } from "react-router-dom";
 import { authContext } from "../../AuthProvider/AuthProvider";
-import './Header';
-const Header = () => {
-  const {user,logOut} = useContext(authContext)
+import "./Header.css";
 
-  const userSignOut = ()=>{
+const Header = () => {
+  const { user, logOut } = useContext(authContext);
+
+  const userSignOut = () => {
     logOut()
-    .then(()=>{})
-    .catch(error =>{
-      toast.error(error.message)
-    })
-  }
+      .then(() => {})
+      .catch((error) => {
+        toast.error(error.message);
+      });
+  };
   return (
     <header className="sticky top-0 p-4 bg-white text-gray-800">
       <div className="container flex justify-between h-16 mx-auto">
@@ -25,78 +27,83 @@ const Header = () => {
         </Link>
         <ul className="items-stretch hidden space-x-3 md:flex">
           <li className="flex">
-            <Link
+            <NavLink
+              onClick={({ isActive }) => (isActive ? "active" : undefined)}
               to="/home"
-              className="flex items-center px-4 -mb-1 "
+              className={`flex items-center px-4 -mb-1 `}
             >
               Home{" "}
-            </Link>
+            </NavLink>
           </li>
           <li className="flex">
-            <Link
+            <NavLink
               rel="noopener noreferrer"
               to="/courses"
               className="flex items-center px-4 -mb-1"
             >
               Courses
-            </Link>
+            </NavLink>
           </li>
           <li className="flex">
-            <Link
-              to="/faq"
-              className="flex items-center px-4 -mb-1 "
-            >
+            <NavLink to="/faq" className="flex items-center px-4 -mb-1 ">
               FAQ
-            </Link>
+            </NavLink>
           </li>
 
           <li className="flex">
-            <Link to="/blog"
-              className="flex items-center px-4 -mb-1"
-            >
-             Blog
-            </Link>
+            <NavLink to="/blog" className="flex items-center px-4 -mb-1">
+              Blog
+            </NavLink>
           </li>
-          {
-            user && user.uid ? <><li className="flex">
-            <Link onClick={userSignOut}
-              rel="noopener noreferrer"
-              className="flex items-center px-4 -mb-1"
-            >
-              Log Out
-            </Link>
-          </li>
-          <li className="flex">
-            <Link to="/profile" className="flex items-center px-2 -mb-1">
-             {user.displayName}
-            </Link>
-          </li>
-          <li className="flex">
-            <Link to="/profile" className="flex items-center px-2 -mb-1">
-            <img src={user.photoURL} alt="" className="w-11 rounded-full"/>
-            </Link>
-          </li></>:
-          <><li className="flex">
-          <Link
-            rel="noopener noreferrer"
-            to="/login"
-            className="flex items-center px-4 -mb-1"
-          >
-            Login{" "}
-          </Link>
-        </li>
-        <li className="flex">
-          <Link
-            rel="noopener noreferrer"
-            to="/signup"
-            className="flex items-center px-4 -mb-1"
-          >
-            Sign up
-          </Link>
-        </li></>
-          }
+          {user && user.uid ? (
+            <>
+              <li className="flex">
+                <Link
+                  onClick={userSignOut}
+                  rel="noopener noreferrer"
+                  className="flex items-center px-4 -mb-1"
+                >
+                  Log Out
+                </Link>
+              </li>
 
-          
+              <li className="flex">
+                <Link to="/profile" className="flex items-center px-2 -mb-1">
+                  {user.photoURL ? (
+                    <img
+                      src={user.photoURL}
+                      alt=""
+                      title={user.displayName}
+                      className="w-11 rounded-full"
+                    />
+                  ) : (
+                    <FaUserCircle title={user.displayName}></FaUserCircle>
+                  )}
+                </Link>
+              </li>
+            </>
+          ) : (
+            <>
+              <li className="flex">
+                <NavLink
+                  rel="noopener noreferrer"
+                  to="/login"
+                  className="flex items-center px-4 -mb-1"
+                >
+                  Login{" "}
+                </NavLink>
+              </li>
+              <li className="flex">
+                <NavLink
+                  rel="noopener noreferrer"
+                  to="/signup"
+                  className="flex items-center px-4 -mb-1"
+                >
+                  Sign up
+                </NavLink>
+              </li>
+            </>
+          )}
         </ul>
         <button className="flex justify-end p-4 md:hidden">
           <svg
