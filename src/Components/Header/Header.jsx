@@ -1,8 +1,18 @@
-import React from "react";
-import { FaUserAlt } from "react-icons/fa";
+import React, { useContext } from "react";
+import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
+import { authContext } from "../../AuthProvider/AuthProvider";
 import './Header';
 const Header = () => {
+  const {user,logOut} = useContext(authContext)
+
+  const userSignOut = ()=>{
+    logOut()
+    .then(()=>{})
+    .catch(error =>{
+      toast.error(error.message)
+    })
+  }
   return (
     <header className="sticky top-0 p-4 bg-white text-gray-800">
       <div className="container flex justify-between h-16 mx-auto">
@@ -47,8 +57,9 @@ const Header = () => {
              Blog
             </Link>
           </li>
-          <li className="flex">
-            <Link
+          {
+            user && user.uid ? <><li className="flex">
+            <Link onClick={userSignOut}
               rel="noopener noreferrer"
               className="flex items-center px-4 -mb-1"
             >
@@ -56,29 +67,36 @@ const Header = () => {
             </Link>
           </li>
           <li className="flex">
-            <Link to="/profile" className="flex items-center px-4 -mb-1">
-              <FaUserAlt></FaUserAlt>
+            <Link to="/profile" className="flex items-center px-2 -mb-1">
+             {user.displayName}
             </Link>
           </li>
+          <li className="flex">
+            <Link to="/profile" className="flex items-center px-2 -mb-1">
+            <img src={user.photoURL} alt="" className="w-11 rounded-full"/>
+            </Link>
+          </li></>:
+          <><li className="flex">
+          <Link
+            rel="noopener noreferrer"
+            to="/login"
+            className="flex items-center px-4 -mb-1"
+          >
+            Login{" "}
+          </Link>
+        </li>
+        <li className="flex">
+          <Link
+            rel="noopener noreferrer"
+            to="/signup"
+            className="flex items-center px-4 -mb-1"
+          >
+            Sign up
+          </Link>
+        </li></>
+          }
 
-          <li className="flex">
-            <Link
-              rel="noopener noreferrer"
-              to="/login"
-              className="flex items-center px-4 -mb-1"
-            >
-              Login{" "}
-            </Link>
-          </li>
-          <li className="flex">
-            <Link
-              rel="noopener noreferrer"
-              to="/signup"
-              className="flex items-center px-4 -mb-1"
-            >
-              Sign up
-            </Link>
-          </li>
+          
         </ul>
         <button className="flex justify-end p-4 md:hidden">
           <svg

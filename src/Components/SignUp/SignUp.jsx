@@ -5,13 +5,17 @@ import { authContext } from '../../AuthProvider/AuthProvider';
 
 const SignUp = () => {
 
-const {createUser} = useContext(authContext);
+const {createUser,updateUserProfile,providerLogin} = useContext(authContext);
 
 const handleSignUp = (e)=>{
   e.preventDefault()
   const form = e.target;
   const name = form.name.value;
   const photoURL = form.photoURL.value
+  const  profile = {
+    displayName:name,
+    photoURL:photoURL
+  }
   const email = form.email.value;
   const password = form.password.value;
   // console.log(name,email,password);
@@ -20,6 +24,27 @@ const handleSignUp = (e)=>{
     const user = result.user ;
     console.log(user);
     toast.success('Successfully Regestered')
+    updateUserProfile(profile)
+    .then(result =>{
+      const user = result.user
+      console.log(user);
+      toast.success('Profile updated')
+    })
+    .catch(error =>{
+      toast.error(error.message)
+    })
+  }).catch(error =>{
+    toast.error(error.message)
+  })
+}
+
+
+const userSignUpWithGoogle = ()=>{
+  providerLogin()
+  .then(result =>{
+    const user = result.user;
+    console.log(user);
+    toast.success('Successfully log in')
   }).catch(error =>{
     toast.error(error.message)
   })
@@ -94,7 +119,7 @@ const handleSignUp = (e)=>{
         <div className="flex-1 h-px sm:w-16 bg-gray-700"></div>
       </div>
       <div className="flex justify-center space-x-4">
-        <button aria-label="Log in with Google" className="p-3 rounded-sm">
+        <button onClick={userSignUpWithGoogle} aria-label="Log in with Google" className="p-3 rounded-sm">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 32 32"

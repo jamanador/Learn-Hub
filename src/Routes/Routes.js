@@ -6,6 +6,7 @@ import Courses from "../Components/Courses/Courses";
 import Faq from "../Components/Faq/Faq";
 import Home from "../Components/Home/Home";
 import Login from "../Components/Login/Login";
+import Profile from "../Components/Profile/Profile";
 import SignUp from "../Components/SignUp/SignUp";
 import Main from "../Main/Main";
 
@@ -56,6 +57,10 @@ const Routes = () => {
             );
           },
           element: <CourseDetails></CourseDetails>,
+        },
+        {
+          path: "/profile",
+          element: <Profile></Profile>,
         },
       ],
     },
