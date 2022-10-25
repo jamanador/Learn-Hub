@@ -24,6 +24,11 @@ const Routes = () => {
         },
         {
           path: "/courses",
+          loader: () => {
+            return fetch(
+              "https://elearning-platform-learn-hub-server.vercel.app"
+            );
+          },
           element: <Courses></Courses>,
         },
         {
