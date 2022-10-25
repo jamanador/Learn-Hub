@@ -1,11 +1,31 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
+import { authContext } from '../../AuthProvider/AuthProvider';
 
 const Login = () => {
+const {signIn} = useContext(authContext)
+const handleLogin = (e)=>{
+e.preventDefault()
+const form = e.target;
+const email = form.email.value;
+const password = form.password.value;
+console.log(email,password);
+signIn(email,password)
+.then(result =>{
+  const user = result.user;
+  console.log(user);
+  toast.success('Successfully Log in')
+})
+.catch(error =>{
+  toast.error(error.message)
+})
+}
+
     return (
         <div className="w-full mt-10 max-w-md mx-auto p-8 space-y-2 rounded-xl bg-gray-200 text-black">
         <h1 className="text-2xl font-bold text-center">Login</h1>
-        <form
+        <form onSubmit={handleLogin}
           action=""
           className="space-y-6 ng-untouched ng-pristine ng-valid"
         >
@@ -39,7 +59,7 @@ const Login = () => {
             </div>
           </div>
           <button className="block w-full p-3 text-center rounded-sm text-white bg-gray-400 hover:bg-purple-600 hover:text-white">
-            Sign in
+           Login
           </button>
         </form>
         <div className="flex items-center pt-4 space-x-1">

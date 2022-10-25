@@ -3,7 +3,6 @@ import { Link, useLoaderData } from "react-router-dom";
 import './CourseDetails.css';
 const CourseDetails = () => {
   const coursesdetails = useLoaderData();
-  console.log(coursesdetails);
   return (
     <div className="container mx-auto">
       <div className="card w-10/12 course_details flex justify-between mx-auto bg-base-100 shadow-sm border border-gray-400 mt-8 rounded-xl">

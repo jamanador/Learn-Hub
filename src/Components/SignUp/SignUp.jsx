@@ -1,14 +1,62 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
+import { authContext } from '../../AuthProvider/AuthProvider';
 
 const SignUp = () => {
+
+const {createUser} = useContext(authContext);
+
+const handleSignUp = (e)=>{
+  e.preventDefault()
+  const form = e.target;
+  const name = form.name.value;
+  const photoURL = form.photoURL.value
+  const email = form.email.value;
+  const password = form.password.value;
+  // console.log(name,email,password);
+  createUser(email,password)
+  .then(result =>{
+    const user = result.user ;
+    console.log(user);
+    toast.success('Successfully Regestered')
+  }).catch(error =>{
+    toast.error(error.message)
+  })
+}
+
+
     return (
       <div className="w-full mt-10 max-w-md mx-auto p-8 space-y-2 rounded-xl bg-gray-200 text-black">
       <h1 className="text-2xl font-bold text-center">Sign Up</h1>
-      <form
+      <form onSubmit={handleSignUp}
         action=""
         className="space-y-6 ng-untouched ng-pristine ng-valid"
       >
+        <div className="space-y-1 text-sm font-medium">
+          <label htmlFor="username" className="block text-black">
+            Full Name
+          </label>
+          <input
+            type="text"
+            name="name"
+            id="name"
+            placeholder="name"
+            className="w-full px-4 py-3 rounded-md border text-black focus:border-0"
+          />
+        </div>
+        <div className="space-y-1 text-sm font-medium">
+          <label htmlFor="username" className="block text-black">
+            Photo Url
+          </label>
+          <input
+            type="text"
+            name="photoURL"
+            id="photoURL"
+            placeholder="photoUrl"
+            className="w-full px-4 py-3 rounded-md border text-black focus:border-0"
+          />
+        </div>
         <div className="space-y-1 text-sm font-medium">
           <label htmlFor="username" className="block text-black">
             Email
@@ -32,14 +80,10 @@ const SignUp = () => {
             placeholder="Password"
             className="w-full px-4 py-3 rounded-md borderborder-gray-700 text-black  bg-white"
           />
-          <div className="flex justify-end text-xs text-gray-400">
-            <Link rel="noopener noreferrer" to="">
-              Forgot Password?
-            </Link>
-          </div>
+        
         </div>
         <button className="block w-full p-3 text-center rounded-sm text-white bg-gray-400 hover:bg-purple-600 hover:text-white">
-          Sign in
+          Submit
         </button>
       </form>
       <div className="flex items-center pt-4 space-x-1">
@@ -79,13 +123,13 @@ const SignUp = () => {
         </button>
       </div>
       <p className="text-xs text-center sm:px-6 text-gray-800">
-        Don't have an account?
+        Already have an account?
         <Link
           rel="noopener noreferrer"
-          to="/signup"
+          to="/login"
           className="ml-2 underline text-gray-800"
         >
-          Sign up
+           Login
         </Link>
       </p>
     </div>
