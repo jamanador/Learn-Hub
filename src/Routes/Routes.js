@@ -1,6 +1,7 @@
 import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Blog from "../Components/Blog/Blog";
+import CourseDetails from "../Components/CourseDetails/CourseDetails";
 import Courses from "../Components/Courses/Courses";
 import Faq from "../Components/Faq/Faq";
 import Home from "../Components/Home/Home";
@@ -47,7 +48,15 @@ const Routes = () => {
           path: "/signup",
           element: <SignUp></SignUp>,
         },
-        {},
+        {
+          path: "/courses/:id",
+          loader: ({ params }) => {
+            return fetch(
+              `https://elearning-platform-learn-hub-server.vercel.app/courses/${params.id}`
+            );
+          },
+          element: <CourseDetails></CourseDetails>,
+        },
       ],
     },
   ]);

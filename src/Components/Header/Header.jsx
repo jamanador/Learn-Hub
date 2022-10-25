@@ -1,6 +1,7 @@
 import React from "react";
 import { FaUserAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import './Header';
 const Header = () => {
   return (
     <header className="sticky top-0 p-4 bg-white text-gray-800">
