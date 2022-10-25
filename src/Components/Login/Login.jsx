@@ -3,14 +3,14 @@ import { Link } from 'react-router-dom';
 
 const Login = () => {
     return (
-        <div className="w-full mt-10 max-w-md mx-auto p-8 space-y-2 rounded-xl bg-gray-900 text-gray-100">
+        <div className="w-full mt-10 max-w-md mx-auto p-8 space-y-2 rounded-xl bg-gray-200 text-black">
         <h1 className="text-2xl font-bold text-center">Login</h1>
         <form
           action=""
           className="space-y-6 ng-untouched ng-pristine ng-valid"
         >
-          <div className="space-y-1 text-sm">
-            <label htmlFor="username" className="block dark:text-gray-400">
+          <div className="space-y-1 text-sm font-medium">
+            <label htmlFor="username" className="block text-black">
               Email
             </label>
             <input
@@ -18,11 +18,11 @@ const Login = () => {
               name="email"
               id="email"
               placeholder="Email"
-              className="w-full px-4 py-3 rounded-md border border-gray-700 bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
+              className="w-full px-4 py-3 rounded-md border text-black focus:border-0"
             />
           </div>
-          <div className="space-y-1 text-sm">
-            <label htmlFor="password" className="block text-gray-400">
+          <div className="space-y-1 text-sm font-medium">
+            <label htmlFor="password" className="block text-gray-800">
               Password
             </label>
             <input
@@ -30,7 +30,7 @@ const Login = () => {
               name="password"
               id="password"
               placeholder="Password"
-              className="w-full px-4 py-3 rounded-md border border-gray-700 bg-gray-900 text-gray-100 focus:border-violet-400"
+              className="w-full px-4 py-3 rounded-md borderborder-gray-700 text-black  bg-white"
             />
             <div className="flex justify-end text-xs text-gray-400">
               <Link rel="noopener noreferrer" to="">
@@ -38,13 +38,13 @@ const Login = () => {
               </Link>
             </div>
           </div>
-          <button className="block w-full p-3 text-center rounded-sm text-gray-900 bg-violet-400">
+          <button className="block w-full p-3 text-center rounded-sm text-white bg-gray-400 hover:bg-purple-600 hover:text-white">
             Sign in
           </button>
         </form>
         <div className="flex items-center pt-4 space-x-1">
           <div className="flex-1 h-px sm:w-16 bg-gray-700"></div>
-          <p className="px-3 text-sm dark:text-gray-400">
+          <p className="px-3 text-sm text-gray-800">
             Login with social accounts
           </p>
           <div className="flex-1 h-px sm:w-16 bg-gray-700"></div>
@@ -78,12 +78,12 @@ const Login = () => {
             </svg>
           </button>
         </div>
-        <p className="text-xs text-center sm:px-6 text-gray-400">
+        <p className="text-xs text-center sm:px-6 text-gray-800">
           Don't have an account?
           <Link
             rel="noopener noreferrer"
             to="/signup"
-            className="ml-2 underline text-gray-100"
+            className="ml-2 underline text-gray-800"
           >
             Sign up
           </Link>
