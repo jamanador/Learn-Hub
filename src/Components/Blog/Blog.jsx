@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 const Blog = () => {
     return (
         <div className="container mx-auto grid gap-6 md:grid-cols-2 sm:grid-cols-1">
-        <div className="card bg-base-100 shadow-md my-4 py-4 ">
+        <div className="card bg-base-100 shadow-md my-4 py-4">
           <div className="card-body px-4">
             <h3 className='font-bold py-2'>What Is Cors ?</h3>
           <p className="">Lectures: <small>“CORS” stands for Cross-Origin Resource Sharing. CORS is a protocol and security standard for browsers that helps to maintain the integrity of a website and secure it from unauthorized access.</small></p>
