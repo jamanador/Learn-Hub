@@ -1,12 +1,12 @@
 import React, { useContext } from 'react';
 import toast from 'react-hot-toast';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { authContext } from '../../AuthProvider/AuthProvider';
 
 const SignUp = () => {
 
-const {createUser,updateUserProfile,providerLogin} = useContext(authContext);
-
+const {createUser,updateUserProfile,providerLogin,verifyEmai} = useContext(authContext);
+const navigate = useNavigate()
 const handleSignUp = (e)=>{
   e.preventDefault()
   const form = e.target;
@@ -25,14 +25,17 @@ const handleSignUp = (e)=>{
     console.log(user);
     toast.success('Successfully Regestered')
     updateUserProfile(profile)
-    .then(result =>{
-      const user = result.user
-      console.log(user);
-      toast.success('Profile updated')
+    .then(()=>{
+      verifyEmai()
+      .then(()=>{
+        toast.success('Please before login verify the email adress')
+      })
+      .catch(error =>{
+        toast.error(error.message)
+      })
     })
-    .catch(error =>{
-      toast.error(error.message)
-    })
+    .catch(()=>{})
+    navigate('/login')
   }).catch(error =>{
     toast.error(error.message)
   })
