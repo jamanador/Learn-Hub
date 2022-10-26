@@ -10,3 +10,8 @@
     border-radius: 15px;
   }
 }
+@media (max-width: 575px) {
+  .pdf_dowonload {
+    flex-direction: column;
+  }
+}

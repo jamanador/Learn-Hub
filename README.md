@@ -4,23 +4,24 @@ Creating community and knowledge around quality online course, blended, and digi
 
 ## Live Link
 
-Hosted in Netlify -> [Learn Hub]()
+Hosted in Netlify -> [Learn Hub](https://elearning-platform-ac57f.web.app)
+
+- Feature :
+  - user auth system login/signup
+  - Course details dynamic route(if you are not log out then you can visit details page)
+  - Private route implement
+  - toggle dark/light theme option
+  - user can download pdf in course details
+- Teachnology :
+  - HTML
+  - Css
+  - Css Library(tailwind)
+  - JavaScript
+  - JS Library (React js)
 
 ## Context API
 
 Documentation Link -> [Link](https://reactjs.org/docs/context.html#api)
-
-- Item 1
-  - Sub item A
-  - Sub item B
-- Item 2
-  - Sub item A
-  - Sub item B\* Item 1
-  - Sub item A
-  - Sub item B
-- Item 2
-  - Sub item A
-  - Sub item B
 
 ## React Router Dom v6.4
 

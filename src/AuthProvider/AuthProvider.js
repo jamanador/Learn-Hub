@@ -20,10 +20,13 @@ const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const googleProvider = new GoogleAuthProvider();
   const githubProvider = new GithubAuthProvider();
+
+  // toggle dark/light theme usestate
   const [myStyle, setMyStyle] = useState({
     color: "black",
     backgroundColor: "white",
   });
+  // toggle dark/light theme function
   const toggoleStyle = () => {
     if (myStyle.color === "black") {
       setMyStyle({
@@ -66,7 +69,7 @@ const AuthProvider = ({ children }) => {
     return signInWithPopup(auth, googleProvider);
   };
   // // send email verification inforce to user
-  // const verifyEmai = () => {
+  // const verifyEmail = () => {
   //   return sendEmailVerification(auth.currentUser);
   // };
 
@@ -85,9 +88,7 @@ const AuthProvider = ({ children }) => {
       setUser(currentUser);
       setLoading(false);
     });
-    return () => {
-      unsubscribe();
-    };
+    return () => unsubscribe();
   }, []);
   const authInfo = {
     user,

@@ -10,13 +10,13 @@ const ErrorPage = () => {
               Error 404
             </p>
             <h1 className="mb-4 text-2xl font-extrabold leading-tight tracking-tight text-left text-gray-900 md:text-4xl">
-              Oops! The page you're looking for isn't here.
+              <span className='font-bold pr-3 text-red-500'>Oops!</span> The page you're looking for isn't here.
             </h1>
             <p className="mb-5 text-base text-left text-gray-800 md:text-xl">
               You might have the wrong address, or the page may have moved.
             </p>
             <Link to="/home">
-              <button className="w-full mb-2 py-2 px-3 text-white mt-3 bg-cyan-600 sm:w-auto sm:mb-0">
+              <button className="w-full mb-2 py-2 px-3 text-white mt-3 bg-purple-600 sm:w-auto sm:mb-0">
                 Back to homepage
               </button>
             </Link>

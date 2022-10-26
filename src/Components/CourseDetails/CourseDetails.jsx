@@ -1,20 +1,32 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Link, useLoaderData } from "react-router-dom";
+import { useReactToPrint } from "react-to-print";
 import './CourseDetails.css';
 const CourseDetails = () => {
   const coursesdetails = useLoaderData();
+
+const downloadRef = useRef()
+const handleDownload = useReactToPrint({
+  content:()=>downloadRef.current
+})
+
   return (
     <div className="container mx-auto">
-      <div className="card w-10/12 course_details flex justify-between mx-auto bg-base-100 shadow-sm border border-gray-400 mt-8 rounded-xl">
+      <div className="card w-10/12 course_details flex justify-between mx-auto bg-base-100 shadow-sm border border-gray-400 mt-8 rounded-xl" ref={downloadRef}>
       <img
           src={coursesdetails?.image}
           alt="/"
           className="w-96 h-auto"
         />
         <div className="card-body pl-8 py-6">
+        <div className="pdf_dowonload flex justify-between items-center">
         <h2 className="font-bold" style={{ fontSize: "14px" }}>
              Course Name:  {coursesdetails?.name}
             </h2>
+            <button onClick={handleDownload} className="px-4 py-1 m-3 bg-gray-300 text-black">
+           DownLoad PDF
+            </button>
+        </div>
             <p style={{ fontSize: "12px" }}>
               Rating: <small>{coursesdetails?.rating}</small>
             </p>
