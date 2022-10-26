@@ -30,12 +30,11 @@ const CourseDetails = () => {
             <p className="font-medium py-2">
               Feature: <small>{coursesdetails?.feature}</small>
             </p>
-          <Link to='/courses'>
-            <button className="px-8 py-1 my-3 bg-purple-600 text-white">
-              Back Now
-            </button>
-          </Link>
-        </div>
+           <Link to={`/checkout/${coursesdetails.id}`}>
+           <button className="px-8 py-1 my-3 bg-purple-600 text-white">
+            Get premium access
+            </button></Link>
+                 </div>
        
        </div>
       </div>

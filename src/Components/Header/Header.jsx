@@ -15,6 +15,7 @@ const Header = () => {
         toast.error(error.message);
       });
   };
+
   return (
     <header className="sticky top-0 p-4 bg-white text-gray-800">
       <div className="container flex justify-between h-16 mx-auto">
@@ -77,7 +78,7 @@ const Header = () => {
                       className="w-11 rounded-full"
                     />
                   ) : (
-                    <FaUserCircle title={user.displayName}></FaUserCircle>
+                    <FaUserCircle title={user.displayName} className="border border-purple-800 w-8 h-8 rounded"></FaUserCircle>
                   )}
                 </Link>
               </li>

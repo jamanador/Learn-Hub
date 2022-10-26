@@ -1,9 +1,9 @@
 import {
   createUserWithEmailAndPassword,
   getAuth,
+  GithubAuthProvider,
   GoogleAuthProvider,
   onAuthStateChanged,
-  sendEmailVerification,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
@@ -19,6 +19,7 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const googleProvider = new GoogleAuthProvider();
+  const githubProvider = new GithubAuthProvider();
 
   // user create function
   const createUser = (email, password) => {
@@ -48,16 +49,24 @@ const AuthProvider = ({ children }) => {
     setLoading(true);
     return signInWithPopup(auth, googleProvider);
   };
-  // send email verification inforce to user
-  const verifyEmai = () => {
-    return sendEmailVerification(auth.currentUser);
+  // // send email verification inforce to user
+  // const verifyEmai = () => {
+  //   return sendEmailVerification(auth.currentUser);
+  // };
+
+  //
+  const gitHubSign = () => {
+    setLoading(true);
+    return signInWithPopup(auth, githubProvider);
   };
+
   // user observer
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      if (currentUser === null || currentUser.emailVerified) {
-        setUser(currentUser);
-      }
+      // if (currentUser == null || currentUser.emailVerified) {
+      //   setUser(currentUser);
+      // }
+      setUser(currentUser);
       setLoading(false);
     });
     return () => {
@@ -73,7 +82,7 @@ const AuthProvider = ({ children }) => {
     updateUserProfile,
     logOut,
     providerLogin,
-    verifyEmai,
+    gitHubSign,
   };
   return (
     <authContext.Provider value={authInfo}>{children}</authContext.Provider>

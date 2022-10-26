@@ -1,12 +1,13 @@
 import React, { useContext } from 'react';
 import toast from 'react-hot-toast';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { authContext } from '../../AuthProvider/AuthProvider';
 
 const SignUp = () => {
-
 const {createUser,updateUserProfile,providerLogin,verifyEmai} = useContext(authContext);
 const navigate = useNavigate()
+const location = useLocation()
+const from = location?.state?.from?.pathname || '/'
 const handleSignUp = (e)=>{
   e.preventDefault()
   const form = e.target;
@@ -35,7 +36,7 @@ const handleSignUp = (e)=>{
       })
     })
     .catch(()=>{})
-    navigate('/login')
+    navigate(from,{replace:true})
   }).catch(error =>{
     toast.error(error.message)
   })
@@ -48,6 +49,7 @@ const userSignUpWithGoogle = ()=>{
     const user = result.user;
     console.log(user);
     toast.success('Successfully log in')
+    navigate(from,{replace:true})
   }).catch(error =>{
     toast.error(error.message)
   })
