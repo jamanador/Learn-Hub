@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { authContext } from '../../AuthProvider/AuthProvider';
 
 const Footer = () => {
+  const {myStyle} = useContext(authContext)
+
     return (
-        <footer className="bg-white  w-full py-8 mt-8">
+        <footer className="bg-white  w-full py-8 mt-8" style={myStyle}>
         <div className="max-w-screen-xl mx-auto px-4">
           <div className=" flex max-w-xs mx-auto items-center justify-between">
             <a

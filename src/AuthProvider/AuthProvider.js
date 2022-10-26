@@ -20,7 +20,23 @@ const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const googleProvider = new GoogleAuthProvider();
   const githubProvider = new GithubAuthProvider();
-
+  const [myStyle, setMyStyle] = useState({
+    color: "black",
+    backgroundColor: "white",
+  });
+  const toggoleStyle = () => {
+    if (myStyle.color === "black") {
+      setMyStyle({
+        color: "white",
+        backgroundColor: "#020A26",
+      });
+    } else {
+      setMyStyle({
+        color: "black",
+        backgroundColor: "white",
+      });
+    }
+  };
   // user create function
   const createUser = (email, password) => {
     setLoading(true);
@@ -83,6 +99,8 @@ const AuthProvider = ({ children }) => {
     logOut,
     providerLogin,
     gitHubSign,
+    myStyle,
+    toggoleStyle,
   };
   return (
     <authContext.Provider value={authInfo}>{children}</authContext.Provider>

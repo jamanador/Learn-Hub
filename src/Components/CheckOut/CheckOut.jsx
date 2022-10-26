@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
+import { authContext } from '../../AuthProvider/AuthProvider';
 
 const CheckOut = () => {
+	const {myStyle} = useContext(authContext)
 	const courseDetails = useLoaderData()
 	console.log(courseDetails);
     return (
-        <div className="mx-auto container flex flex-col max-w-3xl p-6 space-y-4 sm:p-10 bg-gray-100 text-gray-900">
+        <div className="mx-auto container flex flex-col max-w-3xl p-6 space-y-4 sm:p-10 bg-gray-100 text-gray-900" style={myStyle}>
 	<h2 className="text-xl font-bold">Cart Items</h2>
 	<ul className="flex flex-col divide-y divide-gray-700">
 		<li className="flex flex-col py-6 sm:flex-row sm:justify-between">
