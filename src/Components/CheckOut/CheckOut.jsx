@@ -6,10 +6,10 @@ const CheckOut = () => {
 	console.log(courseDetails);
     return (
         <div className="mx-auto container flex flex-col max-w-3xl p-6 space-y-4 sm:p-10 dark:bg-gray-900 dark:text-gray-100">
-	<h2 className="text-xl font-semibold">Cart Items</h2>
+	<h2 className="text-xl font-bold">Cart Items</h2>
 	<ul className="flex flex-col divide-y divide-gray-700">
 		<li className="flex flex-col py-6 sm:flex-row sm:justify-between">
-			<div className="flex w-full space-x-2 sm:space-x-4">
+			<div className="flex w-full space-x-2 pr-4 p-4 sm:space-x-4 border">
 				<img className="flex-shrink-0 object-cover w-20 h-20 dark:border-transparent rounded outline-none sm:w-32 sm:h-32 dark:bg-gray-500" src={courseDetails.image} alt="Polaroid camera" />
 				<div className="flex flex-col justify-between w-full pb-4">
 					<div className="flex justify-between w-full pb-2 space-x-2">

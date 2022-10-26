@@ -5,3 +5,17 @@ header {
   color: purple;
   font-weight: bold;
 }
+@media (max-width: 767px) {
+  .list_menu {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+  .list_menu ul a {
+    padding: 8px 0px;
+    color: #fff;
+  }
+  .active {
+    color: #fff;
+  }
+}

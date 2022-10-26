@@ -4,7 +4,7 @@ import './CourseCard';
 const CourseCard = ({ course }) => {
   console.log(course);
   return (
-    <div>
+    <div className="container mx-auto">
       <div className="card bg-base-100 shadow-xl ">
       <img src={course?.image} alt="/" className="rounded-t-3xl w-full" />
         <div className="card-body flex justify-between p-4">
