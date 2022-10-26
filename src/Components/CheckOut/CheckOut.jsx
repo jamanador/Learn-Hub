@@ -15,11 +15,12 @@ const CheckOut = () => {
 					<div className="flex justify-between w-full pb-2 space-x-2">
 						<div className="space-y-1">
 							<h3 className="text-lg font-semibold leading-snug sm:pr-8">{courseDetails.name}</h3>
-							<p className="text-sm dark:text-gray-400">Classic</p>
+							<p className="text-sm dark:text-gray-400">Lectures : {courseDetails.lectures}</p>
+							<p className="text-sm dark:text-gray-400">Rating: {courseDetails.rating}</p>
 						</div>
 						<div className="text-right">
-							<p className="text-lg font-semibold">59.99€</p>
-							<p className="text-sm line-through dark:text-gray-600">75.50€</p>
+							<p className="text-lg font-semibold">{courseDetails.price}</p>
+							<p className="text-sm line-through dark:text-gray-600">750€</p>
 						</div>
 					</div>
 					<div className="flex text-sm divide-x">
@@ -46,12 +47,12 @@ const CheckOut = () => {
 	</ul>
 	<div className="space-y-1 text-right">
 		<p>Total amount:
-			<span className="font-semibold">357 €</span>
+			<span className="font-semibold">{courseDetails.price}</span>
 		</p>
 		<p className="text-sm dark:text-gray-400">Not including taxes and shipping costs</p>
 	</div>
 	<div className="flex justify-end space-x-4">
-		<Link to="/courses"><button type="button" className="px-6 py-2 border rounded-md dark:border-violet-400">Back
+		<Link to="/courses"><button type="button" className="px-6 py-2 border rounded-md hover:bg-violet-600 hover:text-white">Back
 			<span className="sr-only sm:not-sr-only">to shop</span>
 		</button></Link>
 		<button type="button" className="px-6 py-2 border rounded-md dark:bg-violet-400 dark:text-gray-900 dark:border-violet-400">
