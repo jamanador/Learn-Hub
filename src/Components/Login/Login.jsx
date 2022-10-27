@@ -4,12 +4,11 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { authContext } from "../../AuthProvider/AuthProvider";
 
 const Login = () => {
-  const { signIn, setLoading, providerLogin, gitHubSign } =
-    useContext(authContext);
+  const { signIn, setLoading, providerLogin, gitHubSign } = useContext(authContext);
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     const form = e.target;
     const email = form.email.value;
@@ -18,7 +17,6 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
         console.log(user);
-        form.reset();
         navigate(from, { replace: true });
           toast.success("Successfully Log in");
       })
@@ -26,9 +24,13 @@ const Login = () => {
         toast.error(error.message);
       })
       .finally(() => {
+        navigate(from, { replace: false });
+
         setLoading(false);
       });
   };
+
+
   const userSignInWithGoogle = () => {
     providerLogin()
       .then((result) => {

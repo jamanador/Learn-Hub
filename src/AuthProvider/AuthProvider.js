@@ -60,6 +60,7 @@ const AuthProvider = ({ children }) => {
   // user signOut function
 
   const logOut = () => {
+    setLoading(true);
     return signOut(auth);
   };
   // sign in with google

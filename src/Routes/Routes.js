@@ -72,16 +72,16 @@ const Routes = () => {
         },
         {
           path: "/checkout/:id",
-          element: (
-            <PrivateRoutes>
-              <CheckOut></CheckOut>
-            </PrivateRoutes>
-          ),
           loader: ({ params }) => {
             return fetch(
               `https://elearning-platform-learn-hub-server.vercel.app/courses/${params.id}`
             );
           },
+          element: (
+            <PrivateRoutes>
+              <CheckOut></CheckOut>
+            </PrivateRoutes>
+          ),
         },
       ],
     },

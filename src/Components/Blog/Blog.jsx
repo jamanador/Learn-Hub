@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 const Blog = () => {
+
     return (
         <div className="container mx-auto grid gap-6 md:grid-cols-2 sm:grid-cols-1">
         <div className="card bg-base-100 shadow-md my-4 py-4">

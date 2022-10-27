@@ -106,6 +106,7 @@ const userSignUpWithGithub = () => {
             type="text"
             name="email"
             id="email"
+            required
             placeholder="Email"
             className="w-full px-4 py-3 rounded-md border text-black focus:border-0"
           />
@@ -119,6 +120,7 @@ const userSignUpWithGithub = () => {
             name="password"
             id="password"
             placeholder="Password"
+            required
             className="w-full px-4 py-3 rounded-md borderborder-gray-700 text-black  bg-white"
           />
         
