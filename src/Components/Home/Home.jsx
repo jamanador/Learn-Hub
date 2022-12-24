@@ -1,10 +1,10 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { authContext } from '../../AuthProvider/AuthProvider';
+import useTitle from '../../CustomHook/UseTitle';
 const Home = () => {
-  const {myStyle} = useContext(authContext)
+  useTitle('Home')
     return (
-        <div className="md:px-16 py-8 bg-gray-100" style={myStyle}>
+        <div className="md:px-16 py-8 dark:text-white">
       <div className="flex flex-col justify-center h-[80vh] items-center">
         <div className="flex justify-center items-center">
           <h1 className=" font-mono text-xl md:text-5xl pr-4">

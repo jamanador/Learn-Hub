@@ -1,10 +1,8 @@
-import React, { useContext } from 'react';
-import { authContext } from '../../AuthProvider/AuthProvider';
+import React from 'react';
 
 const Faq = () => {
-    const {myStyle} = useContext(authContext)
     return (
-        <section className="bg-gray-100 dark:text-gray-800" style={myStyle}>
+        <section className="dark:text-white dark:text-gray-800">
         <div className="container flex flex-col justify-center px-4 py-8 mx-auto md:p-8">
             <h2 className="text-2xl font-semibold sm:text-4xl">Frequently Asked Questions</h2>
             <p className="mt-4 mb-8 dark:text-gray-400">Sagittis tempor donec id vestibulum viverra. Neque condimentum primis orci at lacus amet bibendum.</p>

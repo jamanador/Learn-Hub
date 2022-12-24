@@ -5,7 +5,7 @@ const LoadingSpinner = () => {
         <div className="flex h-[84vh] items-center justify-center">
         <button
           type="button"
-          className="inline-flex items-center px-4 py-2 font-semibold leading-6 text-sm shadow rounded-md text-white bg-gray-600 hover:bg-purple-700 transition ease-in-out cursor-not-allowed"
+          className="inline-flex items-center px-4 py-2 font-semibold leading-6 text-sm shadow rounded-md text-white bg-gray-600 dark:text-white hover:bg-purple-700 transition ease-in-out cursor-not-allowed"
           disabled=""
         >
           <svg

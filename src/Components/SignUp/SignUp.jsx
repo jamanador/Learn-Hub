@@ -1,76 +1,117 @@
-import React, { useContext } from 'react';
-import toast from 'react-hot-toast';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { authContext } from '../../AuthProvider/AuthProvider';
+import React, { useContext, useState } from "react";
+import toast from "react-hot-toast";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { authContext } from "../../AuthProvider/AuthProvider";
+import useToken from "../../CustomHook/UseToken";
+import SmallSpinner from "../LoadingSpinner/SmallSpinner";
 
 const SignUp = () => {
-const {createUser,updateUserProfile,providerLogin,gitHubSign} = useContext(authContext);
-const navigate = useNavigate()
-const location = useLocation()
-const from = location?.state?.from?.pathname || '/'
-const handleSignUp = (e)=>{
-  e.preventDefault()
-  const form = e.target;
-  const name = form.name.value;
-  const photoURL = form.photoURL.value
-  const  profile = {
-    displayName:name,
-    photoURL:photoURL
+  const {
+    createUser,
+    updateUserProfile,
+    providerLogin,
+    gitHubSign,
+    loading,
+    setLoading,
+  } = useContext(authContext);
+  const [createdEmail, setCreatedEmail] = useState("");
+  const [token] = useToken(createdEmail);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location?.state?.from?.pathname || "/";
+  if (token) {
+    navigate(from, { replace: true });
   }
-  const email = form.email.value;
-  const password = form.password.value;
-  // console.log(name,email,password);
-  createUser(email,password)
-  .then(result =>{
-    const user = result.user ;
-    console.log(user);
-    toast.success('Successfully Regestered')
-    updateUserProfile(profile)
-    .then(()=>{
-      // verifyEmail()
-      // .then(()=>{
-      //   toast.success('Please before login verify the email address')
-      // })
-      // .catch(error =>{
-      //   toast.error(error.message)
-      // })
+  const handleSignUp = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const name = form.name.value;
+    const email = form.email.value;
+    const password = form.password.value;
+    // imageupload
+    const image = form.image.files[0];
+    const formData = new FormData();
+    formData.append("image", image);
+    const uri = `https://api.imgbb.com/1/upload?key=${process.env.REACT_APP_IMG_BB_HOST_KEY}`;
+    fetch(uri, {
+      method: "POST",
+      body: formData,
     })
-    .catch(()=>{})
-    navigate(from,{replace:true})
-  }).catch(error =>{
-    toast.error(error.message)
-  })
-}
+      .then((res) => res.json())
+      .then((imageData) => {
+        console.log(imageData);
+        createUser(email, password)
+          .then((result) => {
+            const user = result.user;
+            console.log(user);
+            toast.success("Successfully Registered");
+            updateUserProfile(name, imageData.data.display_url)
+              .then(() => {
+                saveUserDb(user.displayName, user.email, user.photoURL);
+                // verifyEmail()
+                // .then(()=>{
+                //   toast.success('Please before login verify the email address')
+                // })
+                // .catch(error =>{
+                //   toast.error(error.message)
+                // })
+              })
+              .catch(() => {});
+          })
+          .catch((error) => {
+            toast.error(error.message);
+            setLoading(false);
+          });
+      });
+    // console.log(name,email,password);
+  };
 
+  const userSignUpWithGoogle = () => {
+    providerLogin()
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        toast.success("Successfully log in");
+        navigate(from, { replace: true });
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
+  };
+  const userSignUpWithGithub = () => {
+    gitHubSign()
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        navigate(from, { replace: true });
+        toast.success("Successfully Log in");
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
+  };
 
-const userSignUpWithGoogle = ()=>{
-  providerLogin()
-  .then(result =>{
-    const user = result.user;
-    console.log(user);
-    toast.success('Successfully log in')
-    navigate(from,{replace:true})
-  }).catch(error =>{
-    toast.error(error.message)
-  })
-}
-const userSignUpWithGithub = () => {
-  gitHubSign()
-    .then((result) => {
-      const user = result.user;
-      console.log(user);
-      navigate(from, { replace: true });
-      toast.success("Successfully Log in");
+  const saveUserDb = (name, email, photoURL) => {
+    const user = { name, email, photoURL };
+    fetch(`${process.env.REACT_APP_SERVER_URL}/users`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(user),
     })
-    .catch((error) => {
-      toast.error(error.message);
-    });
-};
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setCreatedEmail(email);
+      });
+  };
 
-    return (
-      <div className="w-full mt-10 max-w-md mx-auto p-8 space-y-2 rounded-xl bg-gray-200 text-black">
+  return (
+    <div className="w-full mt-10 max-w-md mx-auto p-8 space-y-2 rounded-xl bg-gray-200 text-black">
       <h1 className="text-2xl font-bold text-center">Sign Up</h1>
-      <form onSubmit={handleSignUp}
+      <form
+        onSubmit={handleSignUp}
         action=""
         className="space-y-6 ng-untouched ng-pristine ng-valid"
       >
@@ -87,15 +128,14 @@ const userSignUpWithGithub = () => {
           />
         </div>
         <div className="space-y-1 text-sm font-medium">
-          <label htmlFor="username" className="block text-black">
-            Photo Url
+          <label htmlFor="image" className="block text-black">
+            Select Image:
           </label>
           <input
-            type="text"
-            name="photoURL"
-            id="photoURL"
-            placeholder="photoUrl"
-            className="w-full px-4 py-3 rounded-md border text-black focus:border-0"
+            type="file"
+            name="image"
+            id="image"
+            className="w-full px-4 py-1 rounded-md border text-black focus:border-0"
           />
         </div>
         <div className="space-y-1 text-sm font-medium">
@@ -121,23 +161,24 @@ const userSignUpWithGithub = () => {
             id="password"
             placeholder="Password"
             required
-            className="w-full px-4 py-3 rounded-md borderborder-gray-700 text-black  bg-white"
+            className="w-full px-4 py-3 rounded-md borderborder-gray-700 text-black  dark:text-white"
           />
-        
         </div>
         <button className="block w-full p-3 text-center rounded-sm text-white bg-gray-400 hover:bg-purple-600 hover:text-white">
-          Submit
+          {loading ? <SmallSpinner></SmallSpinner> : " Submit"}
         </button>
       </form>
       <div className="flex items-center pt-4 space-x-1">
         <div className="flex-1 h-px sm:w-16 bg-gray-700"></div>
-        <p className="px-3 text-sm text-gray-800">
-          Login with social accounts
-        </p>
+        <p className="px-3 text-sm text-gray-800">Login with social accounts</p>
         <div className="flex-1 h-px sm:w-16 bg-gray-700"></div>
       </div>
       <div className="flex justify-center space-x-4">
-        <button onClick={userSignUpWithGoogle} aria-label="Log in with Google" className="p-3 rounded-sm">
+        <button
+          onClick={userSignUpWithGoogle}
+          aria-label="Log in with Google"
+          className="p-3 rounded-sm"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 32 32"
@@ -155,7 +196,11 @@ const userSignUpWithGithub = () => {
             <path d="M31.937 6.093c-1.177 0.516-2.437 0.871-3.765 1.032 1.355-0.813 2.391-2.099 2.885-3.631-1.271 0.74-2.677 1.276-4.172 1.579-1.192-1.276-2.896-2.079-4.787-2.079-3.625 0-6.563 2.937-6.563 6.557 0 0.521 0.063 1.021 0.172 1.495-5.453-0.255-10.287-2.875-13.52-6.833-0.568 0.964-0.891 2.084-0.891 3.303 0 2.281 1.161 4.281 2.916 5.457-1.073-0.031-2.083-0.328-2.968-0.817v0.079c0 3.181 2.26 5.833 5.26 6.437-0.547 0.145-1.131 0.229-1.724 0.229-0.421 0-0.823-0.041-1.224-0.115 0.844 2.604 3.26 4.5 6.14 4.557-2.239 1.755-5.077 2.801-8.135 2.801-0.521 0-1.041-0.025-1.563-0.088 2.917 1.86 6.36 2.948 10.079 2.948 12.067 0 18.661-9.995 18.661-18.651 0-0.276 0-0.557-0.021-0.839 1.287-0.917 2.401-2.079 3.281-3.396z"></path>
           </svg>
         </button>
-        <button onClick={userSignUpWithGithub} aria-label="Log in with GitHub" className="p-3 rounded-sm">
+        <button
+          onClick={userSignUpWithGithub}
+          aria-label="Log in with GitHub"
+          className="p-3 rounded-sm"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 32 32"
@@ -172,11 +217,11 @@ const userSignUpWithGithub = () => {
           to="/login"
           className="ml-2 underline text-gray-800"
         >
-           Login
+          Login
         </Link>
       </p>
     </div>
-    );
+  );
 };
 
 export default SignUp;

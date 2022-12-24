@@ -1,10 +1,13 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import toast from "react-hot-toast";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { authContext } from "../../AuthProvider/AuthProvider";
+import useTitle from "../../CustomHook/UseTitle";
 
 const Login = () => {
   const { signIn, setLoading, providerLogin, gitHubSign } = useContext(authContext);
+const [showPass,setshowPass] = useState(false)
+useTitle('Login')
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
@@ -15,8 +18,6 @@ const Login = () => {
     const password = form.password.value;
     signIn(email, password)
       .then((result) => {
-        const user = result.user;
-        console.log(user);
         navigate(from, { replace: true });
           toast.success("Successfully Log in");
       })
@@ -24,8 +25,7 @@ const Login = () => {
         toast.error(error.message);
       })
       .finally(() => {
-        navigate(from, { replace: false });
-
+        navigate(from, { replace: true });
         setLoading(false);
       });
   };
@@ -34,8 +34,6 @@ const Login = () => {
   const userSignInWithGoogle = () => {
     providerLogin()
       .then((result) => {
-        const user = result.user;
-        console.log(user);
         navigate(from, { replace: true });
         toast.success("Successfully Log in");
       })
@@ -57,7 +55,7 @@ const Login = () => {
       });
   };
   return (
-    <div className="w-full mt-10 max-w-md mx-auto p-8 space-y-2 rounded-xl bg-gray-200 text-black">
+    <div className="w-full bg-gray-200 mt-10 max-w-md mx-auto p-8 space-y-2 rounded-xl  text-black">
       <h1 className="text-2xl font-bold text-center">Login</h1>
       <form
         onSubmit={handleLogin}
@@ -79,13 +77,22 @@ const Login = () => {
           <label htmlFor="password" className="block text-gray-800">
             Password
           </label>
-          <input
-            type="password"
+          <div className="flex justify-between">
+         <span className="w-full rounded-md borderborder-gray-700 text-black   flex justify-between items-center">
+         <input
+            type={showPass ? 'text':'password'}
             name="password"
             id="password"
-            placeholder="Password"
-            className="w-full px-4 py-3 rounded-md borderborder-gray-700 text-black  bg-white"
-          />
+            placeholder="******"
+            className="w-full px-4 py-3 focus:border-0"
+            />
+             <svg onClick={()=>setshowPass(!showPass)} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 pr-2">
+  <path strokeLinecap="round" strokeLinejoin="round" d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.523 10.523 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.242 4.242L9.88 9.88" />
+</svg>
+         </span>
+         
+          </div>
+
           <div className="flex justify-end text-xs text-gray-400">
             <Link rel="noopener noreferrer" to="">
               Forgot Password?

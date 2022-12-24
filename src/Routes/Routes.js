@@ -4,13 +4,16 @@ import Blog from "../Components/Blog/Blog";
 import CheckOut from "../Components/CheckOut/CheckOut";
 import CourseDetails from "../Components/CourseDetails/CourseDetails";
 import Courses from "../Components/Courses/Courses";
-import ErrorPage from "../Components/ErrorPage/ErrorPage";
 import Faq from "../Components/Faq/Faq";
 import Home from "../Components/Home/Home";
 import Login from "../Components/Login/Login";
 import Profile from "../Components/Profile/Profile";
 import SignUp from "../Components/SignUp/SignUp";
 import Main from "../Main/Main";
+import MainDashBoard from "../Main/MainDashBoard";
+import AddCourse from "../Pages/Dashboard/AddCourse/AddCourse";
+import Allusers from "../Pages/Dashboard/Allusers/Allusers";
+import MyCart from "../Pages/Dashboard/MyCart/MyCart";
 import PrivateRoutes from "./PrivateRoutes";
 
 const Routes = () => {
@@ -18,7 +21,7 @@ const Routes = () => {
     {
       path: "/",
       element: <Main></Main>,
-      errorElement: <ErrorPage></ErrorPage>,
+      // errorElement: <ErrorPage></ErrorPage>,
       children: [
         {
           path: "/",
@@ -31,9 +34,7 @@ const Routes = () => {
         {
           path: "/courses",
           loader: () => {
-            return fetch(
-              "https://elearning-platform-learn-hub-server.vercel.app"
-            );
+            return fetch(`${process.env.REACT_APP_SERVER_URL}`);
           },
           element: <Courses></Courses>,
         },
@@ -58,7 +59,7 @@ const Routes = () => {
           element: <CourseDetails></CourseDetails>,
           loader: ({ params }) => {
             return fetch(
-              `https://elearning-platform-learn-hub-server.vercel.app/courses/${params.id}`
+              `${process.env.REACT_APP_SERVER_URL}/courses/${params.id}`
             );
           },
         },
@@ -74,7 +75,7 @@ const Routes = () => {
           path: "/checkout/:id",
           loader: ({ params }) => {
             return fetch(
-              `https://elearning-platform-learn-hub-server.vercel.app/courses/${params.id}`
+              `${process.env.REACT_APP_SERVER_URL}/courses/${params.id}`
             );
           },
           element: (
@@ -82,6 +83,28 @@ const Routes = () => {
               <CheckOut></CheckOut>
             </PrivateRoutes>
           ),
+        },
+      ],
+    },
+    {
+      path: "/dashboard",
+      element: <MainDashBoard></MainDashBoard>,
+      children: [
+        {
+          path: "/dashboard/profile",
+          element: <Profile></Profile>,
+        },
+        {
+          path: "/dashboard/allusers",
+          element: <Allusers></Allusers>,
+        },
+        {
+          path: "/dashboard/mycart",
+          element: <MyCart></MyCart>,
+        },
+        {
+          path: "/dashboard/addcourse",
+          element: <AddCourse></AddCourse>,
         },
       ],
     },

@@ -4,10 +4,11 @@ import toast from "react-hot-toast";
 import { FaUserCircle } from "react-icons/fa";
 import { Link, NavLink } from "react-router-dom";
 import { authContext } from "../../AuthProvider/AuthProvider";
+import DarkLight from "../DarkLight/DarkLight";
 import "./Header.css";
 
 const Header = () => {
-  const { user, logOut,myStyle,toggoleStyle } = useContext(authContext);
+  const { user, logOut,} = useContext(authContext);
   const [open, setOpen] = useState(false);
 
   const userSignOut = () => {
@@ -19,7 +20,7 @@ const Header = () => {
   };
 
   return (
-    <header className="sticky top-0 p-4 bg-white text-gray-800 justify-center" style={myStyle}>
+    <header className="sticky top-0 p-4 dark:text-white justify-center">
       <div className="container flex justify-between h-16 mx-auto">
         <Link
           to="/"
@@ -58,14 +59,7 @@ const Header = () => {
               Blog
             </NavLink>
           </li>
-          <li className="flex">
-            <button onClick={toggoleStyle} to="/" className="flex text-purple-700 items-center px-4 -mb-1">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-  <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
-</svg>
-
-            </button>
-          </li>
+          
           {user && user.uid ? (
             <>
               <li className="flex">
@@ -79,7 +73,7 @@ const Header = () => {
               </li>
 
               <li className="flex">
-                <Link to="/profile" className="flex items-center px-2 -mb-1">
+                <Link to="/dashboard" className="flex items-center px-2 -mb-1">
                   {user.photoURL ? (
                     <img
                       src={user.photoURL}
@@ -107,27 +101,13 @@ const Header = () => {
                   Login{" "}
                 </NavLink>
               </li>
-              <li className="flex">
-                <NavLink
-                  rel="noopener noreferrer"
-                  to="/signup"
-                  className="flex items-center px-4 -mb-1"
-                >
-                  Sign up
-                </NavLink>
-              </li>
+            
             </>
           )}
+          <DarkLight></DarkLight>
         </ul>
         <div className="md:hidden flex">
-        <li className="flex">
-            <button onClick={toggoleStyle} to="/" className="flex text-purple-700 items-center px-4">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-  <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
-</svg>
-
-            </button>
-          </li>
+            <DarkLight></DarkLight>
           {open ? (
             <XMarkIcon
               onClick={() => setOpen(!open)}
@@ -181,7 +161,7 @@ const Header = () => {
                 Log Out
               </Link>
 
-              <Link to="/profile" className="flex items-center px-2 -mb-1">
+              <Link to="/dashboard/profile" className="flex items-center px-2 -mb-1">
                 {user.photoURL ? (
                   <img
                     src={user.photoURL}

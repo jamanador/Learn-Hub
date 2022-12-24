@@ -1,12 +1,9 @@
-import { useContext } from "react";
 import "./App.css";
-import { authContext } from "./AuthProvider/AuthProvider";
 import Routes from "./Routes/Routes";
 
 function App() {
-  const { myStyle } = useContext(authContext);
   return (
-    <div className="App" style={myStyle}>
+    <div className="dark:bg-slate-900">
       <Routes></Routes>
     </div>
   );

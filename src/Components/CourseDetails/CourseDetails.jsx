@@ -12,13 +12,13 @@ const handleDownload = useReactToPrint({
 
   return (
     <div className="container mx-auto">
-      <div className="card w-10/12 course_details flex justify-between mx-auto bg-base-100 shadow-sm border border-gray-400 mt-8 rounded-xl" ref={downloadRef}>
+      <div className="card w-10/12 course_details flex justify-between mx-auto bg-base-100 shadow-sm border border-gray-200 dark:border-slate-800 mt-8 rounded-xl dark:bg-slate-900" ref={downloadRef}>
       <img
           src={coursesdetails?.image}
           alt="/"
-          className="w-96 h-auto"
+          className="w-full md:h-96"
         />
-        <div className="card-body pl-8 py-6">
+        <div className="card-body pl-8 py-6 text-black dark:text-white">
         <div className="pdf_dowonload flex justify-between items-center">
         <h2 className="font-bold" style={{ fontSize: "14px" }}>
              Course Name:  {coursesdetails?.name}
@@ -42,7 +42,7 @@ const handleDownload = useReactToPrint({
             <p className="font-medium py-2">
               Feature: <small>{coursesdetails?.feature}</small>
             </p>
-           <Link to={`/checkout/${coursesdetails.id}`}>
+           <Link to={`/checkout/${coursesdetails?._id}`}>
            <button className="px-8 py-1 my-3 bg-purple-600 text-white">
             Get premium access
             </button></Link>

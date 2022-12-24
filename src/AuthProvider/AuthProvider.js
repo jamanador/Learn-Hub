@@ -16,30 +16,30 @@ const auth = getAuth(app);
 export const authContext = createContext();
 
 const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState({});
   const [loading, setLoading] = useState(true);
   const googleProvider = new GoogleAuthProvider();
   const githubProvider = new GithubAuthProvider();
 
   // toggle dark/light theme usestate
-  const [myStyle, setMyStyle] = useState({
-    color: "black",
-    backgroundColor: "white",
-  });
-  // toggle dark/light theme function
-  const toggoleStyle = () => {
-    if (myStyle.color === "black") {
-      setMyStyle({
-        color: "white",
-        backgroundColor: "#020A26",
-      });
-    } else {
-      setMyStyle({
-        color: "black",
-        backgroundColor: "white",
-      });
-    }
-  };
+  // const [myStyle, setMyStyle] = useState({
+  //   color: "black",
+  //   backgroundColor: "white",
+  // });
+  // // toggle dark/light theme function
+  // const toggoleStyle = () => {
+  //   if (myStyle.color === "black") {
+  //     setMyStyle({
+  //       color: "white",
+  //       backgroundColor: "#020A26",
+  //     });
+  //   } else {
+  //     setMyStyle({
+  //       color: "black",
+  //       backgroundColor: "white",
+  //     });
+  //   }
+  // };
   // user create function
   const createUser = (email, password) => {
     setLoading(true);
@@ -53,9 +53,12 @@ const AuthProvider = ({ children }) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
   // user profile update function
-  const updateUserProfile = (profile) => {
+  const updateUserProfile = (name, photo) => {
     setLoading(true);
-    return updateProfile(auth.currentUser, profile);
+    return updateProfile(auth.currentUser, {
+      displayName: name,
+      photoURL: photo,
+    });
   };
   // user signOut function
 
@@ -93,6 +96,7 @@ const AuthProvider = ({ children }) => {
   }, []);
   const authInfo = {
     user,
+    setUser,
     loading,
     setLoading,
     createUser,
@@ -101,8 +105,6 @@ const AuthProvider = ({ children }) => {
     logOut,
     providerLogin,
     gitHubSign,
-    myStyle,
-    toggoleStyle,
   };
   return (
     <authContext.Provider value={authInfo}>{children}</authContext.Provider>
