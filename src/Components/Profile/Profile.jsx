@@ -15,7 +15,7 @@ const Profile = () => {
       </div>
       <div className='flex justify-center text-gray-500 items-center mt-4'>
         
-          <p className='text-3xl font-medium'>User Dashboard</p>
+          <p className='text-3xl font-medium'>{user?.displayName} Dashboard</p>
        
       </div>
     </div>

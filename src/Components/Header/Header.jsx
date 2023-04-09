@@ -62,17 +62,49 @@ const Header = () => {
           
           {user && user.uid ? (
             <>
-              <li className="flex">
+              
+              <div className="dropdown dropdown-end dark:text-white">
+            <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+              <div className="w-10 mt-4 rounded-full">
+              {user.photoURL ? (
+                    <img
+                      src={user.photoURL}
+                      alt=""
+                      title={user.displayName}
+                      className="w-11 rounded-full"
+                    />
+                  ) : (
+                    <FaUserCircle
+                      title={user.displayName}
+                      className="border border-purple-800 w-8 h-8 rounded"
+                    ></FaUserCircle>
+                  )}
+              </div>
+            </label>
+            <ul
+              tabIndex={0}
+              className="menu menu-compact dropdown-content  p-2 shadow border border-gray-500 rounded-box w-36"
+            >
+              <li>
+                <Link href="/" className="justify-between">
+                  Profile
+                  <span className="badge">New</span>
+                </Link>
+              </li>
+              <li>
+                <Link to="/dashboard">Dashboard</Link>
+              </li>
+              <li>
                 <Link
                   onClick={userSignOut}
-                  rel="noopener noreferrer"
-                  className="flex items-center px-4 -mb-1"
+                 
                 >
                   Log Out
                 </Link>
               </li>
-
-              <li className="flex">
+            </ul>
+          </div>
+              {/* <li className="flex">
                 <Link to="/dashboard" className="flex items-center px-2 -mb-1">
                   {user.photoURL ? (
                     <img
@@ -88,7 +120,7 @@ const Header = () => {
                     ></FaUserCircle>
                   )}
                 </Link>
-              </li>
+              </li> */}
             </>
           ) : (
             <>
