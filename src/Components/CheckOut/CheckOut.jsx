@@ -1,45 +1,42 @@
-import React from "react";
+import React, { useContext } from "react";
 import { toast } from "react-hot-toast";
-import { Link, useLoaderData } from "react-router-dom";
+import { Link, useLoaderData, useNavigate } from "react-router-dom";
+import { authContext } from "../../AuthProvider/AuthProvider";
 import useTitle from "../../CustomHook/UseTitle";
 
 const CheckOut = () => {
-  // const {user} = useContext(authContext)
+  const { user } = useContext(authContext);
   useTitle("Checkout");
-  // // const navigate = useNavigate()
+  const navigate = useNavigate();
   const courses = useLoaderData();
-  // // console.log(courses);
-  // const product = {
-  //   customer:user.displayName,
-  //   customerEmail:user.email,
-  //   courseName: courses.name,
-  //   price: parseFloat(courses.price),
-  //   courseImage:courses.image,
-  //   coursesId: courses._id,
-  // };
+  console.log(courses);
+  const product = {
+    customer: user.displayName,
+    customerEmail: user.email,
+    courseName: courses.name,
+    price: parseFloat(courses.price),
+    courseImage: courses.image,
+    coursesId: courses._id,
+  };
 
-  // const handleCheckOut = (e) => {
-  //   e.preventDefault();
-  //   console.log(product);
-  //   fetch(`${process.env.REACT_APP_SERVER_URL}/orders`, {
-  //     method: "POST",
-  //     headers: {
-  //       "content-type": "application/json",
-  //     },
-  //     body: JSON.stringify(product),
-  //   })
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       if(data.acknowledged > 0){
-  //         toast.success(`${product.courseName} Added to your Cart`)
-  //         navigate('/dashboard/mycart')
-  //       }
-  //       console.log(data);
-  //     });
-  // };
-
-  const handleToast = () => {
-    toast.success("Payment feature added soon");
+  const handleCheckOut = (e) => {
+    e.preventDefault();
+    console.log(product);
+    fetch(`${process.env.REACT_APP_SERVER_URL}/orders`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(product),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.acknowledged > 0) {
+          toast.success(`${product.courseName} Added to your Cart`);
+          navigate("/dashboard/mycart");
+        }
+        console.log(data);
+      });
   };
 
   return (
@@ -128,10 +125,10 @@ const CheckOut = () => {
             </button>
           </Link>
           <button
-            onClick={handleToast}
+            onClick={handleCheckOut}
             className="px-6 py-2 border rounded-md bg-violet-800 text-white border-violet-400"
           >
-            <span className="sr-only sm:not-sr-only">Continue to </span>Checkout
+            <span className="sr-only sm:not-sr-only">Continue to </span>Purchase
           </button>
         </div>
       </div>

@@ -1,10 +1,11 @@
-import React, { useRef } from "react";
+import React, { useContext, useRef } from "react";
 import { Link, useLoaderData } from "react-router-dom";
 import { useReactToPrint } from "react-to-print";
+import { authContext } from "../../AuthProvider/AuthProvider";
 import './CourseDetails.css';
 const CourseDetails = () => {
   const coursesdetails = useLoaderData();
-
+  const {user} = useContext(authContext)
 const downloadRef = useRef()
 const handleDownload = useReactToPrint({
   content:()=>downloadRef.current
@@ -42,10 +43,15 @@ const handleDownload = useReactToPrint({
             <p className="font-medium py-2">
               Feature: <small>{coursesdetails?.feature}</small>
             </p>
-           <Link to={`/checkout/${coursesdetails?._id}`}>
-           <button className="px-8 py-1 my-3 bg-purple-600 text-white">
-            Get premium access
-            </button></Link>
+           {
+            user && user.uid ? <Link to={`/checkout/${coursesdetails?._id}`}>
+            <button className="px-8 py-1 my-3 bg-purple-600 text-white">
+             Proceed to Checkout
+             </button></Link>:<Link to={`/checkout/${coursesdetails?._id}`}>
+            <button className="px-8 py-1 my-3 bg-purple-600 text-white">
+             Get Premium Access
+             </button></Link>
+           }
                  </div>
        
        </div>
