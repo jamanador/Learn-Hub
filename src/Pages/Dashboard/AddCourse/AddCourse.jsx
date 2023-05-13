@@ -153,7 +153,7 @@ const AddCourse = () => {
           <input
             type="submit"
             value="Add"
-            className="block w-full p-3 text-center rounded-sm text-white bg-purple-700"
+            className="block py-2 px-36 text-center rounded-xl text-white bg-purple-700"
           />
         </form>
       </div>

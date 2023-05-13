@@ -25,8 +25,8 @@ if(isLoading){
 }
   return (
     <div>
-      <h3 className="font-bold py-4">My Cart {orders.length}</h3>
-      <div className="overflow-x-auto w-full">
+      <h3 className="font-bold py-4 dark:text-white">My Cart {orders.length}</h3>
+      <div className="overflow-x-auto w-full dark:bg-red-300">
         <table className="table w-full">
           <thead className="text-left bg-black">
             <tr>

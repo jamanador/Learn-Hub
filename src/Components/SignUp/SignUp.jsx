@@ -161,7 +161,7 @@ const SignUp = () => {
             id="password"
             placeholder="Password"
             required
-            className="w-full px-4 py-3 rounded-md borderborder-gray-700 text-black  dark:text-white"
+            className="w-full px-4 py-3 rounded-md borderborder-gray-700 text-black"
           />
         </div>
         <button className="block w-full p-3 text-center rounded-sm text-white bg-gray-400 hover:bg-purple-600 hover:text-white">

@@ -88,7 +88,12 @@ const Routes = () => {
     },
     {
       path: "/dashboard",
-      element: <MainDashBoard></MainDashBoard>,
+      element: (
+        <PrivateRoutes>
+          {" "}
+          <MainDashBoard></MainDashBoard>
+        </PrivateRoutes>
+      ),
       children: [
         {
           path: "/dashboard/profile",

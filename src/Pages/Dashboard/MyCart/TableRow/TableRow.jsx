@@ -40,7 +40,7 @@ const TableRow = ({ index, booking, setBookOrders }) => {
         </td>
         <td>
           <label htmlFor="paymentModal" className="btn btn-ghost btn-xs">
-            Update
+            Delete
           </label>
         </td>
       </tr>

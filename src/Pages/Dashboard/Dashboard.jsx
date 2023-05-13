@@ -7,7 +7,7 @@ const Dashboard = () => {
   const { user } = useContext(authContext);
   return (
     <div className="dark:text-white">
-      <div className="py-8 text-gray-900 dark:text-white bg-gray-300 lg:h-screen">
+      <div className="py-8 text-gray-900 dark:text-white  lg:h-screen">
         <div className="flex justify-center">
           <img
             src={user?.photoURL}
