@@ -4,6 +4,7 @@ import { authContext } from "../../../AuthProvider/AuthProvider";
 import LoadingSpinner from "../../../Components/LoadingSpinner/LoadingSpinner";
 import PaymentModal from "../PaymentModal/PaymentModal";
 import TableRow from "./TableRow/TableRow";
+import './myCart.css';
 const MyCart = () => {
   const {user} = useContext(authContext)
   const [bookOrders, setBookOrders] = useState(null);
@@ -26,9 +27,9 @@ if(isLoading){
   return (
     <div>
       <h3 className="font-bold py-4 dark:text-white">My Cart {orders.length}</h3>
-      <div className="overflow-x-auto w-full dark:bg-red-300">
-        <table className="table w-full">
-          <thead className="text-left bg-black">
+      <div className="overflow-x-auto w-full">
+        <table className="table w-full dark:text-black">
+          <thead className="text-left">
             <tr>
               <th></th>
               <th>Course</th>

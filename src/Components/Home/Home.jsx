@@ -1,7 +1,9 @@
 import React from 'react';
 import useTitle from '../../CustomHook/UseTitle';
+import AdmissionGoing from './AdmissionGoing/AdmissionGoing';
 import Banner from './Banner/Banner';
 import BannerBtm from './BannerBtm/BannerBtm';
+import OurTopCourses from './OurTopCourses/OurTopCourses';
 const Home = () => {
   useTitle('Home')
     return (
@@ -24,6 +26,8 @@ const Home = () => {
     <div>
       <Banner></Banner>
       <BannerBtm></BannerBtm>
+      <OurTopCourses/>
+      <AdmissionGoing></AdmissionGoing>
     </div>
     );
 };

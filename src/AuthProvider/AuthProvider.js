@@ -21,25 +21,6 @@ const AuthProvider = ({ children }) => {
   const googleProvider = new GoogleAuthProvider();
   const githubProvider = new GithubAuthProvider();
 
-  // toggle dark/light theme usestate
-  // const [myStyle, setMyStyle] = useState({
-  //   color: "black",
-  //   backgroundColor: "white",
-  // });
-  // // toggle dark/light theme function
-  // const toggoleStyle = () => {
-  //   if (myStyle.color === "black") {
-  //     setMyStyle({
-  //       color: "white",
-  //       backgroundColor: "#020A26",
-  //     });
-  //   } else {
-  //     setMyStyle({
-  //       color: "black",
-  //       backgroundColor: "white",
-  //     });
-  //   }
-  // };
   // user create function
   const createUser = (email, password) => {
     setLoading(true);

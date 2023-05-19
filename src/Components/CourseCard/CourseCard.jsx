@@ -18,7 +18,8 @@ const CourseCard = ({ course }) => {
           </div>
         </div>
         <div className="tablet text-center bottom-2 btn-item">
-            <Link to={`/courses/${course._id}`}><button className="px-8 py-1 bg-purple-600 text-white">Purchase Now</button></Link>
+            <Link to={`/courses/${course._id}`}><button className="px-8 py-1 bg-purple-600 text-white">
+              Read Details</button></Link>
         </div>
       </div>
     </div>

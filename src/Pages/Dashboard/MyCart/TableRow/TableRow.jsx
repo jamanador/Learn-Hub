@@ -39,7 +39,7 @@ const TableRow = ({ index, booking, setBookOrders }) => {
           </button>
         </td>
         <td>
-          <label htmlFor="paymentModal" className="btn btn-ghost btn-xs">
+          <label htmlFor="paymentModal" className="btn btn-ghost btn-xs hover:bg-red-500 hover:text-white">
             Delete
           </label>
         </td>

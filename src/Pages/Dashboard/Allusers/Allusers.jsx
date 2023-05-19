@@ -14,7 +14,7 @@ const Allusers = () => {
   return (
     <div className="px-12">
       <h3 className="font-bold py-6">All Users {users.length}</h3>
-      <table className="table w-full text-center">
+      <table className="table w-full text-center dark:text-black">
         <thead className="py-4 bg-black">
           <tr>
             <th></th>
