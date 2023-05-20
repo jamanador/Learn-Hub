@@ -1,25 +1,31 @@
 import React, { useContext, useState } from "react";
+import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { authContext } from "../../AuthProvider/AuthProvider";
 import useTitle from "../../CustomHook/UseTitle";
+import useToken from "../../CustomHook/UseToken";
 
 const Login = () => {
-  const { signIn, setLoading, providerLogin, gitHubSign } = useContext(authContext);
-const [showPass,setshowPass] = useState(false)
-useTitle('Login')
-  const navigate = useNavigate();
+  const { signIn, setLoading, providerLogin, gitHubSign } =
+    useContext(authContext);
+  const [showPass, setshowPass] = useState(false);
+  const [loginEmail, setLoginEmail] = useState("");
+  const [token] = useToken(loginEmail);
+const {register,handleSubmit,formState:{errors}} = useForm()
+
+  useTitle("Login");
   const location = useLocation();
+  const navigate = useNavigate();
   const from = location.state?.from?.pathname || "/";
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    const form = e.target;
-    const email = form.email.value;
-    const password = form.password.value;
-    signIn(email, password)
+  if (token) {
+    navigate(from, { replace: true });
+    toast.success("Successfully Log in");
+  }
+  const handleLogin = data => {
+    signIn(data.email, data.password)
       .then((result) => {
-        navigate(from, { replace: true });
-          toast.success("Successfully Log in");
+        setLoginEmail(data.email);
       })
       .catch((error) => {
         toast.error(error.message);
@@ -29,7 +35,6 @@ useTitle('Login')
         setLoading(false);
       });
   };
-
 
   const userSignInWithGoogle = () => {
     providerLogin()
@@ -55,10 +60,10 @@ useTitle('Login')
       });
   };
   return (
-    <div className="w-full bg-gray-200 mt-10 max-w-md mx-auto p-8 space-y-2 rounded-xl  text-black">
+    <div className="w-full bg-gray-200 mt-10 max-w-md mx-auto p-8 space-y-2 rounded-xl text-black">
       <h1 className="text-2xl font-bold text-center">Login</h1>
       <form
-        onSubmit={handleLogin}
+        onSubmit={handleSubmit(handleLogin)}
         className="space-y-6 ng-untouched ng-pristine ng-valid"
       >
         <div className="space-y-1 text-sm font-medium">
@@ -66,31 +71,49 @@ useTitle('Login')
             Email
           </label>
           <input
-            type="text"
-            name="email"
-            id="email"
+           {...register("email", { required: true })}
+            type="email"
             placeholder="Email"
             className="w-full px-4 py-3 rounded-md border text-black focus:border-0"
           />
+           {errors.email && (
+          <span className="text-red-600 font-medium pt-2">
+            {errors.email?.message}
+          </span>
+        )}
         </div>
         <div className="space-y-1 text-sm font-medium">
           <label htmlFor="password" className="block text-gray-800">
             Password
           </label>
           <div className="flex justify-between">
-         <span className="w-full rounded-md borderborder-gray-700 text-black   flex justify-between items-center">
-         <input
-            type={showPass ? 'text':'password'}
-            name="password"
-            id="password"
-            placeholder="******"
-            className="w-full px-4 py-3 focus:border-0"
-            />
-             <svg onClick={()=>setshowPass(!showPass)} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 pr-2">
-  <path strokeLinecap="round" strokeLinejoin="round" d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.523 10.523 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.242 4.242L9.88 9.88" />
-</svg>
-         </span>
-         
+            <span className="w-full rounded-md borderborder-gray-700 text-black   flex justify-between items-center">
+              <input type={showPass ? "text" : "password"}
+                {...register("password", { required: "Password Required" })}
+                placeholder="******"
+                className="w-full px-4 py-3 focus:border-0"
+              />
+               {errors.password && (
+                  <span className="text-red-600 font-medium pt-2">
+                    {errors.password?.message}
+                  </span>
+                )}
+              <svg
+                onClick={() => setshowPass(!showPass)}
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-6 h-6 pr-2"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.523 10.523 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.242 4.242L9.88 9.88"
+                />
+              </svg>
+            </span>
           </div>
 
           <div className="flex justify-end text-xs text-gray-400">
@@ -99,9 +122,9 @@ useTitle('Login')
             </Link>
           </div>
         </div>
-        <button className="block w-full p-3 text-center rounded-sm text-white bg-gray-400 hover:bg-purple-600 hover:text-white">
+        <input type="submit" className="block w-full p-3 text-center rounded-sm text-white bg-gray-400 hover:bg-purple-600 hover:text-white">
           Login
-        </button>
+        </input>
       </form>
       <div className="flex items-center pt-4 space-x-1">
         <div className="flex-1 h-px sm:w-16 bg-gray-700"></div>

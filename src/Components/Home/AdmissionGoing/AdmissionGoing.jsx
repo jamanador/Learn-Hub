@@ -14,7 +14,7 @@ const AdmissionGoing = () => {
                 <li className='px-2 text-lg'> ✔ Quality education for a prosperous future.</li>
                 <li className='px-2 text-lg'> ✔ Taking your career to new heights.</li>
             </ul>
-            <Link to='/courses'><button className="lg:px-16 px-8 py-2 lg:my-4 my-2 bg-purple-700 text-white">Apply Now</button></Link>
+            <Link to='/courses'><button className="lg:px-16 px-8 py-2 lg:my-4 my-2 bg-purple-700 text-white rounded-full">Apply Now</button></Link>
         </div>
     );
 };
