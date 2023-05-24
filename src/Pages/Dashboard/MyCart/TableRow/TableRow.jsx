@@ -4,7 +4,7 @@ const TableRow = ({ index, booking, setBookOrders }) => {
     // console.log(booking);
   return (
     <>
-      <tr>
+      <tr className="text-sm">
         <th>{index + 1}</th>
         <td>
           <div className="flex items-center space-x-3">
@@ -17,9 +17,9 @@ const TableRow = ({ index, booking, setBookOrders }) => {
               </div>
             </div>
             <div>
-              <span>{booking?.courseName}</span>
+              <span className="font-medium">{booking?.courseName}</span>
               <br></br>
-              <small>Price : {booking?.price}</small>
+              <small className="font-semibold">Price : {booking?.price}</small>
             </div>
           </div>
         </td>

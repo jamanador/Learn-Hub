@@ -3,8 +3,10 @@ import React, { useContext } from "react";
 import { FaCartArrowDown } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { authContext } from "../../AuthProvider/AuthProvider";
+import UseAdmin from "../../CustomHook/UseAdmin";
 const Dashboard = () => {
   const { user } = useContext(authContext);
+  const [isAdmin] = UseAdmin(user?.email)
   return (
     <div className="dark:text-white">
       <div className="py-8 text-gray-900 dark:text-white  lg:h-screen">
@@ -34,7 +36,7 @@ const Dashboard = () => {
 
               <span className="mx-4 font-medium">My Cart</span>
             </Link>
-            <Link
+          {isAdmin && <>  <Link
               className="flex items-center px-4 py-2 mt-5 text-gray-900 dark:text-white first-letter:transition-colors duration-300 transform  "
               to="/dashboard/allusers"
             >
@@ -103,7 +105,7 @@ const Dashboard = () => {
               </svg>
 
               <span className="mx-4 font-medium">All Courses</span>
-            </Link>
+            </Link></>}
             <Link
               className="flex items-center px-4 py-2 mt-5 text-gray-900 dark:text-white first-letter:transition-colors duration-300 transform  "
               to="/"

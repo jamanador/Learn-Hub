@@ -15,6 +15,7 @@ import AddCourse from "../Pages/Dashboard/AddCourse/AddCourse";
 import AllCourses from "../Pages/Dashboard/AllCourses/AllCourses";
 import Allusers from "../Pages/Dashboard/Allusers/Allusers";
 import MyCart from "../Pages/Dashboard/MyCart/MyCart";
+import AdminRoutes from "./AdminRoutes";
 import PrivateRoutes from "./PrivateRoutes";
 
 const Routes = () => {
@@ -102,7 +103,11 @@ const Routes = () => {
         },
         {
           path: "/dashboard/allusers",
-          element: <Allusers></Allusers>,
+          element: (
+            <AdminRoutes>
+              <Allusers></Allusers>
+            </AdminRoutes>
+          ),
         },
         {
           path: "/dashboard/mycart",
@@ -110,11 +115,19 @@ const Routes = () => {
         },
         {
           path: "/dashboard/addcourse",
-          element: <AddCourse></AddCourse>,
+          element: (
+            <AdminRoutes>
+              <AddCourse></AddCourse>
+            </AdminRoutes>
+          ),
         },
         {
           path: "/dashboard/allcourses",
-          element: <AllCourses />,
+          element: (
+            <AdminRoutes>
+              <AllCourses />
+            </AdminRoutes>
+          ),
         },
       ],
     },

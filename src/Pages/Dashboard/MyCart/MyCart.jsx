@@ -26,9 +26,9 @@ if(isLoading){
 }
   return (
     <div>
-      <h3 className="font-bold py-4 dark:text-white">My Cart {orders.length}</h3>
-      <div className="overflow-x-auto w-full">
-        <table className="table w-full dark:text-black">
+      <h3 className="text-center font-bold py-6 dark:text-white">You're already {orders.length} Course Added in Cart</h3>
+      <div className="lg:px-12 overflow-x-auto w-full">
+        <table className="table w-full dark:text-black px-4 customtable">
           <thead className="text-left">
             <tr>
               <th></th>
