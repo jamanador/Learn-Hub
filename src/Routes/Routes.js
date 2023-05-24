@@ -12,6 +12,7 @@ import SignUp from "../Components/SignUp/SignUp";
 import Main from "../Main/Main";
 import MainDashBoard from "../Main/MainDashBoard";
 import AddCourse from "../Pages/Dashboard/AddCourse/AddCourse";
+import AllCourses from "../Pages/Dashboard/AllCourses/AllCourses";
 import Allusers from "../Pages/Dashboard/Allusers/Allusers";
 import MyCart from "../Pages/Dashboard/MyCart/MyCart";
 import PrivateRoutes from "./PrivateRoutes";
@@ -110,6 +111,10 @@ const Routes = () => {
         {
           path: "/dashboard/addcourse",
           element: <AddCourse></AddCourse>,
+        },
+        {
+          path: "/dashboard/allcourses",
+          element: <AllCourses />,
         },
       ],
     },

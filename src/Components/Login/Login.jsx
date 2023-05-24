@@ -12,7 +12,11 @@ const Login = () => {
   const [showPass, setshowPass] = useState(false);
   const [loginEmail, setLoginEmail] = useState("");
   const [token] = useToken(loginEmail);
-const {register,handleSubmit,formState:{errors}} = useForm()
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   useTitle("Login");
   const location = useLocation();
@@ -22,7 +26,7 @@ const {register,handleSubmit,formState:{errors}} = useForm()
     navigate(from, { replace: true });
     toast.success("Successfully Log in");
   }
-  const handleLogin = data => {
+  const handleLogin = (data) => {
     signIn(data.email, data.password)
       .then((result) => {
         setLoginEmail(data.email);
@@ -71,16 +75,16 @@ const {register,handleSubmit,formState:{errors}} = useForm()
             Email
           </label>
           <input
-           {...register("email", { required: true })}
+            {...register("email", { required: true })}
             type="email"
             placeholder="Email"
             className="w-full px-4 py-3 rounded-md border text-black focus:border-0"
           />
-           {errors.email && (
-          <span className="text-red-600 font-medium pt-2">
-            {errors.email?.message}
-          </span>
-        )}
+          {errors.email && (
+            <span className="text-red-600 font-medium pt-2">
+              {errors.email?.message}
+            </span>
+          )}
         </div>
         <div className="space-y-1 text-sm font-medium">
           <label htmlFor="password" className="block text-gray-800">
@@ -88,16 +92,17 @@ const {register,handleSubmit,formState:{errors}} = useForm()
           </label>
           <div className="flex justify-between">
             <span className="w-full rounded-md borderborder-gray-700 text-black   flex justify-between items-center">
-              <input type={showPass ? "text" : "password"}
+              <input
+                type={showPass ? "text" : "password"}
                 {...register("password", { required: "Password Required" })}
                 placeholder="******"
                 className="w-full px-4 py-3 focus:border-0"
               />
-               {errors.password && (
-                  <span className="text-red-600 font-medium pt-2">
-                    {errors.password?.message}
-                  </span>
-                )}
+              {errors.password && (
+                <span className="text-red-600 font-medium pt-2">
+                  {errors.password?.message}
+                </span>
+              )}
               <svg
                 onClick={() => setshowPass(!showPass)}
                 xmlns="http://www.w3.org/2000/svg"
@@ -122,9 +127,12 @@ const {register,handleSubmit,formState:{errors}} = useForm()
             </Link>
           </div>
         </div>
-        <input type="submit" className="block w-full p-3 text-center rounded-sm text-white bg-gray-400 hover:bg-purple-600 hover:text-white">
+        <button
+          type="submit"
+          className="block w-full p-3 text-center rounded-sm text-white bg-gray-400 hover:bg-purple-600 hover:text-white"
+        >
           Login
-        </input>
+        </button>
       </form>
       <div className="flex items-center pt-4 space-x-1">
         <div className="flex-1 h-px sm:w-16 bg-gray-700"></div>

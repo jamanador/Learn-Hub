@@ -104,29 +104,11 @@ const Header = () => {
               </li>
             </ul>
           </div>
-              {/* <li className="flex">
-                <Link to="/dashboard" className="flex items-center px-2 -mb-1">
-                  {user.photoURL ? (
-                    <img
-                      src={user.photoURL}
-                      alt=""
-                      title={user.displayName}
-                      className="w-11 rounded-full"
-                    />
-                  ) : (
-                    <FaUserCircle
-                      title={user.displayName}
-                      className="border border-purple-800 w-8 h-8 rounded"
-                    ></FaUserCircle>
-                  )}
-                </Link>
-              </li> */}
             </>
           ) : (
             <>
               <li className="flex">
                 <NavLink
-                  rel="noopener noreferrer"
                   to="/login"
                   className="flex items-center px-4 -mb-1"
                 >

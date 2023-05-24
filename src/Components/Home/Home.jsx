@@ -1,5 +1,6 @@
 import React from 'react';
 import useTitle from '../../CustomHook/UseTitle';
+import AccessCourses from './AccessCourses/AccessCourses';
 import AdmissionGoing from './AdmissionGoing/AdmissionGoing';
 import Banner from './Banner/Banner';
 import BannerBtm from './BannerBtm/BannerBtm';
@@ -28,6 +29,7 @@ const Home = () => {
       <BannerBtm></BannerBtm>
       <OurTopCourses/>
       <AdmissionGoing></AdmissionGoing>
+      <AccessCourses></AccessCourses>
     </div>
     );
 };
