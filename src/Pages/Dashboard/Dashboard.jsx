@@ -8,9 +8,9 @@ const Dashboard = () => {
   const { user } = useContext(authContext);
   const [isAdmin] = UseAdmin(user?.email)
   return (
-    <div className="dark:text-white">
-      <div className="py-8 text-gray-900 dark:text-white  lg:h-screen">
-        <div className="flex justify-center">
+    <div className="dark:text-white px-8 bg-gray-100 dark:bg-slate-800">
+      <div className="py-8 lg:h-screen">
+      <div className="flex justify-center">
           <img
             src={user?.photoURL}
             alt=""
@@ -18,10 +18,10 @@ const Dashboard = () => {
           />
         </div>
         <div className="flex flex-col items-center mt-6 -mx-2">
-          <h4 className="mx-2 mt-2 font-medium text-gray-900 dark:text-white  hover:underline">
+          <h4 className="mx-2 mt-2 font-medium  hover:underline">
             {user?.displayName}
           </h4>
-          <p className="mx-2 mt-1 text-sm font-medium text-gray-900 dark:text-white  hover:underline">
+          <p className="mx-2 mt-1 text-sm font-medium  hover:underline">
             {user?.email}
           </p>
         </div>
@@ -29,7 +29,7 @@ const Dashboard = () => {
         <div className="flex flex-col justify-between flex-1 mt-6">
           <nav>
             <Link
-              className="flex items-center px-4 py-2 mt-5 text-gray-900 dark:text-white first-letter:transition-colors duration-300 transform  "
+              className="flex items-center px-4 py-2 mt-5 first-letter:transition-colors duration-300 transform  "
               to="/dashboard/mycart"
             >
               <FaCartArrowDown></FaCartArrowDown>
@@ -37,7 +37,7 @@ const Dashboard = () => {
               <span className="mx-4 font-medium">My Cart</span>
             </Link>
           {isAdmin && <>  <Link
-              className="flex items-center px-4 py-2 mt-5 text-gray-900 dark:text-white first-letter:transition-colors duration-300 transform  "
+              className="flex items-center px-4 py-2 mt-5 first-letter:transition-colors duration-300 transform  "
               to="/dashboard/allusers"
             >
               <svg
@@ -65,7 +65,7 @@ const Dashboard = () => {
               <span className="mx-4 font-medium">All Users</span>
             </Link>
             <Link
-              className="flex items-center px-4 py-2 mt-5 text-gray-900 dark:text-white first-letter:transition-colors duration-300 transform  "
+              className="flex items-center px-4 py-2 mt-5 first-letter:transition-colors duration-300 transform  "
               to="/dashboard/addcourse"
             >
               <svg
@@ -86,20 +86,20 @@ const Dashboard = () => {
               <span className="mx-4 font-medium">Add Course</span>
             </Link>
             <Link
-              className="flex items-center px-4 py-2 mt-5 text-gray-900 dark:text-white first-letter:transition-colors duration-300 transform  "
+              className="flex items-center px-4 py-2 mt-5 first-letter:transition-colors duration-300 transform  "
               to="/dashboard/allcourses"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
-                stroke-width="1.5"
+                strokeWidth="1.5"
                 stroke="currentColor"
                 class="w-6 h-6"
               >
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                   d="M21 12a2.25 2.25 0 00-2.25-2.25H15a3 3 0 11-6 0H5.25A2.25 2.25 0 003 12m18 0v6a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 18v-6m18 0V9M3 12V9m18 0a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 9m18 0V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v3"
                 />
               </svg>
@@ -107,7 +107,7 @@ const Dashboard = () => {
               <span className="mx-4 font-medium">All Courses</span>
             </Link></>}
             <Link
-              className="flex items-center px-4 py-2 mt-5 text-gray-900 dark:text-white first-letter:transition-colors duration-300 transform  "
+              className="flex items-center px-4 py-2 mt-5 first-letter:transition-colors duration-300 transform  "
               to="/"
             >
               <BackwardIcon className="w-4 h-4" />

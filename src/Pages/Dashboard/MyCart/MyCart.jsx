@@ -2,13 +2,16 @@ import { useQuery } from "@tanstack/react-query";
 import React, { useContext, useState } from "react";
 import { authContext } from "../../../AuthProvider/AuthProvider";
 import LoadingSpinner from "../../../Components/LoadingSpinner/LoadingSpinner";
-import PaymentModal from "../PaymentModal/PaymentModal";
+import Confrimation from "../../../Components/Modal/Confrimation";
 import TableRow from "./TableRow/TableRow";
 import './myCart.css';
 const MyCart = () => {
   const {user} = useContext(authContext)
-  const [bookOrders, setBookOrders] = useState(null);
-  const { data: orders = [],isLoading } = useQuery({
+  const [deleteOrder,setDeleteOrders] = useState(null)
+  const closeModal = ()=>{
+    setDeleteOrders(null)
+  }
+  const { data: orders = [],isLoading,refetch } = useQuery({
     queryKey: ["orders",user?.email],
     queryFn: async () => {
       const res = await fetch(`${process.env.REACT_APP_SERVER_URL}/orders?email=${user?.email}`,{
@@ -21,13 +24,30 @@ const MyCart = () => {
       return data;
     },
   });
+
+const handleDelete = id =>{
+  fetch(`${process.env.REACT_APP_SERVER_URL}/orders/${id}`,{
+    method:'DELETE'
+  })
+  .then(res => res.json())
+  .then(data =>{
+    if(data.data.deletedCount >0){
+      refetch()
+      closeModal()
+    }
+  console.log(data);
+  })
+}
+
+
+
 if(isLoading){
   return <LoadingSpinner></LoadingSpinner>
 }
   return (
     <div>
       <h3 className="text-center font-bold py-6 dark:text-white">You're already {orders.length} Course Added in Cart</h3>
-      <div className="lg:px-12 overflow-x-auto w-full">
+      <div className="lg:px-12 w-full">
         <table className="table w-full dark:text-black px-4 customtable">
           <thead className="text-left">
             <tr>
@@ -44,16 +64,17 @@ if(isLoading){
                 key={order._id}
                 booking={order}
                 index={index}
-                setBookOrders={setBookOrders}
+                setDeleteOrders={setDeleteOrders}
               ></TableRow>
             ))}
           </tbody>
         </table>
+        {
+          deleteOrder && <Confrimation modalData={deleteOrder}
+          successAction={handleDelete}
+          ></Confrimation>
+        }
       </div>
-     { bookOrders &&  <PaymentModal
-        bookOrders={bookOrders}
-        setBookOrders={setBookOrders}
-      ></PaymentModal>}
     </div>
   );
 };
