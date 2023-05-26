@@ -15,6 +15,7 @@ import AddCourse from "../Pages/Dashboard/AddCourse/AddCourse";
 import AllCourses from "../Pages/Dashboard/AllCourses/AllCourses";
 import Allusers from "../Pages/Dashboard/Allusers/Allusers";
 import MyCart from "../Pages/Dashboard/MyCart/MyCart";
+import Payment from "../Pages/Dashboard/MyCart/Payment/Payment";
 import AdminRoutes from "./AdminRoutes";
 import PrivateRoutes from "./PrivateRoutes";
 
@@ -112,6 +113,15 @@ const Routes = () => {
         {
           path: "/dashboard/mycart",
           element: <MyCart></MyCart>,
+        },
+        {
+          path: "/dashboard/payment/:id",
+          loader: ({ params }) => {
+            return fetch(
+              `${process.env.REACT_APP_SERVER_URL}/orders/${params.id}`
+            );
+          },
+          element: <Payment></Payment>,
         },
         {
           path: "/dashboard/addcourse",

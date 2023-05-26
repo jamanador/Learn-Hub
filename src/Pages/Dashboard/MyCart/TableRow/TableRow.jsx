@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const TableRow = ({ index, booking, setDeleteOrders }) => {
   return (
@@ -31,11 +32,9 @@ const TableRow = ({ index, booking, setDeleteOrders }) => {
           </div>
         </td>
         <td>
-          <button>
-            <label htmlFor="paymentModal" className="btn btn-ghost btn-xs">
-              Pay
-            </label>
-          </button>
+        <Link to={`/dashboard/payment/${booking._id}`}>  <button className="btn btn-ghost btn-xs">
+          Pay
+          </button></Link>
         </td>
         <td>
           <button onClick={() => setDeleteOrders(booking)}>
