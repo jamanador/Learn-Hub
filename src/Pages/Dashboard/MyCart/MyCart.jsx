@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useContext, useState } from "react";
+import { toast } from "react-hot-toast";
 import { authContext } from "../../../AuthProvider/AuthProvider";
 import LoadingSpinner from "../../../Components/LoadingSpinner/LoadingSpinner";
 import Confrimation from "../../../Components/Modal/Confrimation";
@@ -33,6 +34,7 @@ const handleDelete = id =>{
   .then(data =>{
     if(data.data.deletedCount >0){
       refetch()
+      toast.success('Deleted Successfully')
       closeModal()
     }
   console.log(data);

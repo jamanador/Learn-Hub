@@ -21,7 +21,6 @@ const CheckOut = () => {
 
   const handleCheckOut = (e) => {
     e.preventDefault();
-    console.log(product);
     fetch(`${process.env.REACT_APP_SERVER_URL}/orders`, {
       method: "POST",
       headers: {
@@ -31,11 +30,14 @@ const CheckOut = () => {
     })
       .then((res) => res.json())
       .then((data) => {
+        console.log(data);
         if (data.acknowledged > 0) {
           toast.success(`${product.courseName} Added to your Cart`);
           navigate("/dashboard/mycart");
+        } else {
+          toast.error(data.message);
+          navigate("/courses")
         }
-        console.log(data);
       });
   };
 

@@ -8,17 +8,9 @@ const Payment = () => {
         <div className="px-12">
       <h3 className="font-bold py-3">Payement for your Course</h3>
       <div className="text-white card w-96  bg-gray-900 shadow-2xl h-96">
-        {/* <div className="card-body">
-          <h2 className="card-title">Service : </h2>
-          <p className="font-bold">Patient: </p>
-          <p>Date :</p>
-          <p>Phone: </p>
-          <p>Email: </p>
-          
-        </div> */}
         <figure><img src={paymentData?.courseImage} alt="" /></figure>
   <div className="card-body">
-    <h2 className="card-title">Course : {paymentData?.courseName}</h2>
+    <h2 className="card-title text-lg">Course : {paymentData?.courseName}</h2>
     <p>Price : {paymentData?.price}</p>
    
   </div>
