@@ -108,7 +108,7 @@ const SignUp = () => {
   };
 
   return (
-    <div className="w-full mt-10 max-w-md mx-auto p-8 space-y-2 rounded-xl bg-gray-200 text-black">
+    <div className="w-full mt-10 max-w-md mx-auto p-8 space-y-2 rounded-xl bg-gray-200 dark:bg-slate-800 dark:text-white">
       <h1 className="text-2xl font-bold text-center">Sign Up</h1>
       <form
         onSubmit={handleSignUp}
@@ -116,7 +116,7 @@ const SignUp = () => {
         className="space-y-6 ng-untouched ng-pristine ng-valid"
       >
         <div className="space-y-1 text-sm font-medium">
-          <label htmlFor="username" className="block text-black">
+          <label htmlFor="username" className="block">
             Full Name
           </label>
           <input
@@ -124,22 +124,22 @@ const SignUp = () => {
             name="name"
             id="name"
             placeholder="name"
-            className="w-full px-4 py-3 rounded-md border text-black focus:border-0"
+            className="w-full px-4 py-3 rounded-md border dark:border-gray-700 dark:bg-slate-900"
           />
         </div>
         <div className="space-y-1 text-sm font-medium">
-          <label htmlFor="image" className="block text-black">
+          <label htmlFor="image" className="block">
             Select Image:
           </label>
           <input
             type="file"
             name="image"
             id="image"
-            className="w-full px-4 py-1 rounded-md border text-black focus:border-0"
+            className="w-full px-4 py-1 rounded-md border dark:border-gray-700 dark:bg-slate-900"
           />
         </div>
         <div className="space-y-1 text-sm font-medium">
-          <label htmlFor="username" className="block text-black">
+          <label htmlFor="username" className="block">
             Email
           </label>
           <input
@@ -148,11 +148,11 @@ const SignUp = () => {
             id="email"
             required
             placeholder="Email"
-            className="w-full px-4 py-3 rounded-md border text-black focus:border-0"
+            className="w-full px-4 py-3 rounded-md border dark:border-gray-700 dark:bg-slate-900"
           />
         </div>
         <div className="space-y-1 text-sm font-medium">
-          <label htmlFor="password" className="block text-gray-800">
+          <label htmlFor="password" className="block text-gray-800 dark:text-white">
             Password
           </label>
           <input
@@ -161,16 +161,16 @@ const SignUp = () => {
             id="password"
             placeholder="Password"
             required
-            className="w-full px-4 py-3 rounded-md borderborder-gray-700 text-black"
+            className="w-full px-4 py-3 rounded-md border dark:border-gray-700 dark:bg-slate-900"
           />
         </div>
-        <button className="block w-full p-3 text-center rounded-sm text-white bg-gray-400 hover:bg-purple-600 hover:text-white">
+        <button className="block w-full p-3 text-center rounded-sm text-white bg-gray-400 hover:bg-purple-600 hover:text-white dark:bg-slate-900">
           {loading ? <SmallSpinner></SmallSpinner> : " Submit"}
         </button>
       </form>
       <div className="flex items-center pt-4 space-x-1">
-        <div className="flex-1 h-px sm:w-16 bg-gray-700"></div>
-        <p className="px-3 text-sm text-gray-800">Login with social accounts</p>
+        <div className="flex-1 h-px sm:w-16 bg-gray-700 dark:bg-slate-700"></div>
+        <p className="px-3 text-sm text-gray-800 dark:text-gray-300">Login with social accounts</p>
         <div className="flex-1 h-px sm:w-16 bg-gray-700"></div>
       </div>
       <div className="flex justify-center space-x-4">
@@ -210,12 +210,12 @@ const SignUp = () => {
           </svg>
         </button>
       </div>
-      <p className="text-xs text-center sm:px-6 text-gray-800">
+      <p className="text-xs text-center sm:px-6 text-gray-800 dark:text-gray-300">
         Already have an account?
         <Link
           rel="noopener noreferrer"
           to="/login"
-          className="ml-2 underline text-gray-800"
+          className="ml-2 underline"
         >
           Login
         </Link>

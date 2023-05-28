@@ -64,21 +64,21 @@ const Login = () => {
       });
   };
   return (
-    <div className="w-full bg-gray-200 mt-10 max-w-md mx-auto p-8 space-y-2 rounded-xl text-black">
+    <div className="w-full dark:bg-slate-800 dark:text-white bg-gray-200 mt-10 max-w-md mx-auto p-8 space-y-2 rounded-xl">
       <h1 className="text-2xl font-bold text-center">Login</h1>
       <form
         onSubmit={handleSubmit(handleLogin)}
         className="space-y-6 ng-untouched ng-pristine ng-valid"
       >
         <div className="space-y-1 text-sm font-medium">
-          <label htmlFor="username" className="block text-black">
+          <label htmlFor="username" className="block">
             Email
           </label>
           <input
             {...register("email", { required: true })}
             type="email"
             placeholder="Email"
-            className="w-full px-4 py-3 rounded-md border text-black focus:border-0"
+            className="w-full px-4 py-3 rounded-md focus:border-0 dark:bg-slate-900"
           />
           {errors.email && (
             <span className="text-red-600 font-medium pt-2">
@@ -87,16 +87,16 @@ const Login = () => {
           )}
         </div>
         <div className="space-y-1 text-sm font-medium">
-          <label htmlFor="password" className="block text-gray-800">
+          <label htmlFor="password" className="block ">
             Password
           </label>
-          <div className="flex justify-between">
-            <span className="w-full rounded-md borderborder-gray-700 text-black   flex justify-between items-center">
+          <div className="flex justify-between w-full px-4  rounded-md  focus:border-0 dark:bg-slate-900">
+            <span className="w-full rounded-md   flex justify-between items-center">
               <input
                 type={showPass ? "text" : "password"}
                 {...register("password", { required: "Password Required" })}
                 placeholder="******"
-                className="w-full px-4 py-3 focus:border-0"
+                className="w-full px-4 py-2  dark:bg-slate-900"
               />
               {errors.password && (
                 <span className="text-red-600 font-medium pt-2">
@@ -129,14 +129,14 @@ const Login = () => {
         </div>
         <button
           type="submit"
-          className="block w-full p-3 text-center rounded-sm text-white bg-gray-400 hover:bg-purple-600 hover:text-white"
+          className="block w-full p-3 text-center rounded-sm text-white bg-gray-400 hover:bg-purple-600 hover:text-white dark:bg-gray-900"
         >
           Login
         </button>
       </form>
       <div className="flex items-center pt-4 space-x-1">
         <div className="flex-1 h-px sm:w-16 bg-gray-700"></div>
-        <p className="px-3 text-sm text-gray-800">Login with social accounts</p>
+        <p className="px-3 text-sm ">Login with social accounts</p>
         <div className="flex-1 h-px sm:w-16 bg-gray-700"></div>
       </div>
       <div className="flex justify-center space-x-4">
@@ -176,12 +176,12 @@ const Login = () => {
           </svg>
         </button>
       </div>
-      <p className="text-xs text-center sm:px-6 text-gray-800">
+      <p className="text-xs text-center sm:px-6 ">
         Don't have an account?
         <Link
           rel="noopener noreferrer"
           to="/signup"
-          className="ml-2 underline text-gray-800"
+          className="ml-2 underline "
         >
           Sign up
         </Link>

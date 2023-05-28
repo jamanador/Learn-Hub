@@ -1,7 +1,7 @@
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
 import React, { useContext, useState } from "react";
 import toast from "react-hot-toast";
-import { FaUserCircle } from "react-icons/fa";
+import { FaCartArrowDown, FaUserCircle } from "react-icons/fa";
 import { Link, NavLink } from "react-router-dom";
 import { authContext } from "../../AuthProvider/AuthProvider";
 import DarkLight from "../DarkLight/DarkLight";
@@ -62,6 +62,14 @@ const Header = () => {
           
           {user && user.uid ? (
             <>
+            <li className="flex">
+            <Link
+              className="flex items-center px-2 py-2 first-letter:transition-colors duration-300 transform"
+              to="/dashboard/mycart"
+            >
+              <FaCartArrowDown></FaCartArrowDown>
+            </Link>
+            </li>
               
               <div className="dropdown dropdown-end dark:text-white">
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">

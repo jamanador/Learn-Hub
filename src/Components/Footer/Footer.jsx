@@ -3,7 +3,7 @@ import React from 'react';
 const Footer = () => {
 
     return (
-        <footer className="dark:text-white  w-full py-8 mt-8" >
+        <footer className="dark:text-white  w-full py-8 mt-20" >
         <div className="max-w-screen-xl mx-auto px-4">
           <div className=" flex max-w-xs mx-auto items-center justify-between">
             <a
@@ -82,8 +82,8 @@ const Footer = () => {
               </svg>
             </a>
           </div>
-          <div className="text-center text-purple-600 pt-10 sm:pt-12 font-light flex items-center justify-center">
-            All Rights Reserved By &copy; Learn Hub | 2022
+          <div className="text-center text-purple-600 pt-6 sm:pt-8 font-light flex items-center justify-center">
+            All Rights Reserved By &copy; <a className='px-1 font-semibold text-green-300' href='https://www.linkedin.com/in/jamaanador' target='#'>Ador</a> | 2023
           </div>
         </div>
       </footer>
