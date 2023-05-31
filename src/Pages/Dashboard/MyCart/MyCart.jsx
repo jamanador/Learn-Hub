@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useContext, useState } from "react";
 import { toast } from "react-hot-toast";
+import { Link } from "react-router-dom";
 import { authContext } from "../../../AuthProvider/AuthProvider";
 import LoadingSpinner from "../../../Components/LoadingSpinner/LoadingSpinner";
 import Confrimation from "../../../Components/Modal/Confrimation";
@@ -47,37 +48,38 @@ if(isLoading){
   return <LoadingSpinner></LoadingSpinner>
 }
   return (
-    <div>
-      <h3 className="text-center font-bold py-6 dark:text-white">You're already {orders.length} Course Added in Cart</h3>
-      <div className="lg:px-12 w-full">
-        <table className="table w-full dark:text-black px-4 customtable">
-          <thead className="text-left">
-            <tr>
-              <th></th>
-              <th>Course</th>
-              <th>Customer Name</th>
-              <th>Payment</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody className="text-left">
-            {orders?.map((order, index) => (
-              <TableRow
-                key={order._id}
-                booking={order}
-                index={index}
-                setDeleteOrders={setDeleteOrders}
-              ></TableRow>
-            ))}
-          </tbody>
-        </table>
-        {
-          deleteOrder && <Confrimation modalData={deleteOrder}
-          successAction={handleDelete}
-          ></Confrimation>
-        }
-      </div>
+  <>
+   {orders.length ?  <>
+    <h3 className="text-center font-bold py-6 dark:text-white">You're already {orders.length} Course Added in Cart</h3>
+    <div className="lg:px-12 w-full">
+      <table className="table w-full dark:text-black px-4 customtable">
+        <thead className="text-left">
+          <tr>
+            <th></th>
+            <th>Course</th>
+            <th>Customer Name</th>
+            <th>Payment</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody className="text-left">
+          {orders?.map((order, index) => (
+            <TableRow
+              key={order._id}
+              booking={order}
+              index={index}
+              setDeleteOrders={setDeleteOrders}
+            ></TableRow>
+          ))}
+        </tbody>
+      </table>
+      {
+        deleteOrder && <Confrimation modalData={deleteOrder}
+        successAction={handleDelete}
+        ></Confrimation>
+      }
     </div>
+  </>:<div className="p-4 text-center flex items-center h-60 justify-center"><div><p className="text-4xl text-gray-500">😔</p><h3 className="text-red-500 font-bold py-1 text-xl">Your Cart is empty</h3><p>Looks like you have not added anything to you cart.</p><small>Goo ahead & Explore our  <Link className="text-purple-600 font-medium" to='/courses'> Courses</Link></small></div></div>}</>
   );
 };
 

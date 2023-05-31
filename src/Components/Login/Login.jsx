@@ -5,11 +5,13 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { authContext } from "../../AuthProvider/AuthProvider";
 import useTitle from "../../CustomHook/UseTitle";
 import useToken from "../../CustomHook/UseToken";
+import SmallSpinner from "../LoadingSpinner/SmallSpinner";
 
 const Login = () => {
   const { signIn, setLoading, providerLogin, gitHubSign } =
     useContext(authContext);
   const [showPass, setshowPass] = useState(false);
+  const [loadingSpinner,setLoadingSpinner] = useState(false)
   const [loginEmail, setLoginEmail] = useState("");
   const [token] = useToken(loginEmail);
   const {
@@ -23,10 +25,12 @@ const Login = () => {
   const navigate = useNavigate();
   const from = location.state?.from?.pathname || "/";
   if (token) {
+    setLoadingSpinner(false)
     navigate(from, { replace: true });
     toast.success("Successfully Log in");
   }
   const handleLogin = (data) => {
+    setLoadingSpinner(true)
     signIn(data.email, data.password)
       .then((result) => {
         setLoginEmail(data.email);
@@ -131,7 +135,7 @@ const Login = () => {
           type="submit"
           className="block w-full p-3 text-center rounded-sm text-white bg-gray-400 hover:bg-purple-600 hover:text-white dark:bg-gray-900"
         >
-          Login
+          {loadingSpinner ? <SmallSpinner/>:'Login'}
         </button>
       </form>
       <div className="flex items-center pt-4 space-x-1">

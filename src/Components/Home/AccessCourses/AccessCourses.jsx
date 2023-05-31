@@ -15,7 +15,7 @@ const AccessCourses = () => {
           {
             acceses?.map((access,index) => <li className="list-none py-1 text-black font-medium  dark:text-white" key={index} access={access}><span className="text-green-500 font-bold pr-2">✔</span> {access}</li>)
           }
-          <Link to='/courses'><button className="py-2 lg:mt-7 my-2 decoration-slice text-red-500 rounded-full underline dark:text-white dark:font-bold">Get Started Now</button></Link>
+          <Link to='/courses'><button className="py-1 lg:mt-7 my-2 px-3 decoration-slice text-red-500 underline dark:no-underline dark:border dark:border-gray-400 dark:text-white">Get Started Now</button></Link>
         </div>
       </div>
     </div>

@@ -1,16 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import SmallSpinner from "../../../Components/LoadingSpinner/SmallSpinner";
 
 const AddCourse = () => {
+  const [loading, setLoading] = useState(false);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-
+  const navigate = useNavigate();
   const handleAddDoctor = (data) => {
-    console.log(data);
     const image = data.image[0];
     const formData = new FormData();
     formData.append("image", image);
@@ -22,6 +24,7 @@ const AddCourse = () => {
       .then((res) => res.json())
       .then((imageData) => {
         if (imageData.success) {
+          setLoading(true);
           const course = {
             name: data.name,
             price: data.price,
@@ -39,8 +42,8 @@ const AddCourse = () => {
           })
             .then((res) => res.json())
             .then((data) => {
-              console.log(data);
-              toast.success(`${data.name} is Added Successfully`);
+              toast.success(`${data?.name} is Added Successfully`);
+              navigate("/dashboard/allcourses");
             });
         }
       });
@@ -63,7 +66,7 @@ const AddCourse = () => {
                   type="text"
                   placeholder="name"
                   {...register("name", { required: "name is required" })}
-                  className="w-full focus:outline-0 px-4 py-2 rounded-md border-gray-200 border dark:text-white  text-gray-800 "
+                  className="w-full focus:outline-0 px-4 py-2 rounded-md border-gray-200 border dark:text-black  text-gray-800 "
                 />
               </div>
             </li>
@@ -77,7 +80,7 @@ const AddCourse = () => {
                   type="number"
                   placeholder="price"
                   {...register("price", { required: "price is required" })}
-                  className="w-full focus:outline-0 px-4 py-2 rounded-md border-gray-200 border dark:text-white  text-gray-800 "
+                  className="w-full focus:outline-0 px-4 py-2 rounded-md border-gray-200 border dark:text-black  text-gray-800 "
                 />
               </div>
             </li>
@@ -93,7 +96,7 @@ const AddCourse = () => {
                   {...register("lectures", {
                     required: "Lectures is required",
                   })}
-                  className="w-full focus:outline-0 px-4 py-2 rounded-md border-gray-200 border dark:text-white  text-gray-800 "
+                  className="w-full focus:outline-0 px-4 py-2 rounded-md border-gray-200 border dark:text-black  text-gray-800 "
                 />
               </div>
             </li>
@@ -106,7 +109,7 @@ const AddCourse = () => {
             {...register("feature", {
               required: "Feature is required",
             })}
-            className="w-full focus:outline-0 px-4 py-2 rounded-md border-gray-200 border dark:text-white  text-gray-800 "
+            className="w-full focus:outline-0 px-4 py-2 rounded-md border-gray-200 border dark:text-black  text-gray-800 "
             id=""
             cols="44"
             rows="2"
@@ -118,7 +121,7 @@ const AddCourse = () => {
             {...register("description", {
               required: "description is required",
             })}
-            className="w-full focus:outline-0 px-4 py-2 rounded-md border-gray-200 border dark:text-white  text-gray-800 "
+            className="w-full focus:outline-0 px-4 py-2 rounded-md border-gray-200 border dark:text-black  text-gray-800 "
             id=""
             cols="44"
             rows="4"
@@ -130,7 +133,7 @@ const AddCourse = () => {
             type="email"
             placeholder="Email"
             {...register("email", { required: "Email is required" })}
-            className="w-full focus:outline-0 px-4 py-2 rounded-md border-gray-200 border dark:text-white  text-gray-800 "
+            className="w-full focus:outline-0 px-4 py-2 rounded-md border-gray-200 border dark:text-black  text-gray-800 "
           />
           {errors.email && (
             <span className="text-red-600 font-medium pt-2">
@@ -148,13 +151,14 @@ const AddCourse = () => {
             placeholder="name"
             accept="image/*"
             {...register("image", { required: "photo is required" })}
-            className="text-center w-full px-4 py-2 rounded-md border-gray-200 border dark:text-white text-gray-800 "
+            className="text-center w-full px-4 py-2 rounded-md border-gray-200 border dark:text-black text-gray-800 "
           />
-          <input
+          <button
             type="submit"
-            value="Add"
             className="block py-2 px-36 text-center rounded-xl text-white bg-purple-700"
-          />
+          >
+            {loading ? <SmallSpinner /> : "Addd"}
+          </button>
         </form>
       </div>
     </div>

@@ -11,18 +11,19 @@ const SignUp = () => {
     updateUserProfile,
     providerLogin,
     gitHubSign,
-    loading,
-    setLoading,
   } = useContext(authContext);
   const [createdEmail, setCreatedEmail] = useState("");
+  const [loadingSpinner,setLoadingSpinner]= useState(false)
   const [token] = useToken(createdEmail);
   const navigate = useNavigate();
   const location = useLocation();
   const from = location?.state?.from?.pathname || "/";
   if (token) {
+    setLoadingSpinner(false)
     navigate(from, { replace: true });
   }
   const handleSignUp = (e) => {
+    setLoadingSpinner(true)
     e.preventDefault();
     const form = e.target;
     const name = form.name.value;
@@ -60,7 +61,6 @@ const SignUp = () => {
           })
           .catch((error) => {
             toast.error(error.message);
-            setLoading(false);
           });
       });
     // console.log(name,email,password);
@@ -165,7 +165,7 @@ const SignUp = () => {
           />
         </div>
         <button className="block w-full p-3 text-center rounded-sm text-white bg-gray-400 hover:bg-purple-600 hover:text-white dark:bg-slate-900">
-          {loading ? <SmallSpinner></SmallSpinner> : " Submit"}
+          {loadingSpinner ? <SmallSpinner></SmallSpinner> : " Submit"}
         </button>
       </form>
       <div className="flex items-center pt-4 space-x-1">
