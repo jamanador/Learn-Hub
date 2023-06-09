@@ -32,9 +32,14 @@ const TableRow = ({ index, booking, setDeleteOrders }) => {
           </div>
         </td>
         <td>
-        <Link to={`/dashboard/payment/${booking._id}`}>  <button className="btn btn-ghost btn-xs">
+        {
+          booking.price && !booking.paid && <Link to={`/dashboard/payment/${booking._id}`}>  <button className="btn btn-ghost btn-xs">
           Pay
           </button></Link>
+        }
+        {
+          booking.price && booking.paid && <span>Paid</span>
+        }
         </td>
         <td>
           <button onClick={() => setDeleteOrders(booking)}>

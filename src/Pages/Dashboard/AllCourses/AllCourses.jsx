@@ -35,7 +35,7 @@ const AllCourses = () => {
         All Courses Here {courses.length}
       </h3>
       <div className="lg:px-12 w-full">
-        <table className="table w-full dark:text-black px-4 customtable">
+        <table className="table w-full overflow-x-auto scroll-auto dark:text-black px-4">
           <thead className="text-left">
             <tr>
               <th></th>

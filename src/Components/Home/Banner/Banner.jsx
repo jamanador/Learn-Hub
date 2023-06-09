@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import banner from "../../../images/banner.png";
 const Banner = () => {
   return (
-    <div className="container mx-auto dark:text-white flex justify-center items-center">
+    <div className="container mx-auto dark:text-white flex justify-center items-center px-8">
       <div className="flex-1 px-4 md:px-0">
         <h1 className="font-bold lg:text-4xl md:text-3xl text-xl">
           Build Skills with <span className="text-purple-600">Online Courses</span> <br /> from expert instructor

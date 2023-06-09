@@ -1,4 +1,8 @@
-# Learn Hub Project Repository
+<!-- # projects ongoing 
+
+
+
+<!-- # Learn Hub Project Repository
 
 Creating community and knowledge around quality online course, blended, and digital learning while driving innovation.
 
@@ -8,8 +12,11 @@ Hosted in Firebase Live Link -> [Learn Hub](https://elearning-platform-ac57f.web
 
 - Feature :
   - user authentication system login/signup
+  - user can add product & pay with stripe payment method.
+  - Admin can all things likee user delete,new course added,Remove courses so on
+  - Different route for user & admin specific role.
   - Course details dynamic route(if you are not sign in ,you can't visit detailspage)
-  - Private route implement
+  - JWT TOKEN Based auth implement
   - user can visit specific category
   - toggle dark/light theme option
   - user can download pdf in course details
