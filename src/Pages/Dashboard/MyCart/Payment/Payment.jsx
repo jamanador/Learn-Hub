@@ -25,7 +25,7 @@ const Payment = () => {
           <p>Price : {paymentData?.price}</p>
           <button
           type="submit"
-          className="my-6 rounded-md py-1 px-6 bg-black text-white font-medium"
+          className="my-6 rounded-md py-1 px-4 bg-black text-white font-medium"
         >
           Confirm Now
         </button>
