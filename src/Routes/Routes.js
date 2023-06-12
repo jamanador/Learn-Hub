@@ -16,6 +16,7 @@ import AllCourses from "../Pages/Dashboard/AllCourses/AllCourses";
 import Allusers from "../Pages/Dashboard/Allusers/Allusers";
 import MyCart from "../Pages/Dashboard/MyCart/MyCart";
 import Payment from "../Pages/Dashboard/MyCart/Payment/Payment";
+import PaymentSuccess from "../Pages/Dashboard/MyCart/Payment/PaymentSuccess/PaymentSuccess";
 import AdminRoutes from "./AdminRoutes";
 import PrivateRoutes from "./PrivateRoutes";
 
@@ -65,6 +66,10 @@ const Routes = () => {
               `${process.env.REACT_APP_SERVER_URL}/courses/${params.id}`
             );
           },
+        },
+        {
+          path: "/confirmpayment/success/:tranId",
+          element: <PaymentSuccess />,
         },
         {
           path: "/profile",

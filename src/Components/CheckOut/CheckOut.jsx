@@ -116,6 +116,7 @@ const CheckOut = () => {
             Not including taxes and shipping costs
           </p>
         </div>
+       
         <div className="flex justify-end space-x-4">
           <Link to="/courses">
             <button
