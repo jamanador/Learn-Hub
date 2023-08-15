@@ -1,4 +1,4 @@
-<!-- # Learn Hub Project Repository
+Learn Hub Project Repository
 
 Creating community and knowledge around quality online course, blended, and digital learning while driving innovation.
 
@@ -22,11 +22,16 @@ Hosted in Firebase Live Link -> [Learn Hub](https://elearning-platform-ac57f.web
   - Css Library(tailwind)
   - JavaScript
   - JS Library (React js)
+ 
+
+- Admin(helloadoradi@gmail.com)
+-Pass (helloadoradi708090)
+
 
 ## Resources & Credits
 
 Tilwind Components ->
-[Kitwind](https://kitwind.io/products/kometa/components)a
+[Kitwind](https://kitwind.io/products/kometa/components)
 
 ## Other Resources
 
